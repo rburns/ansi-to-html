@@ -8,16 +8,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/rburns/ansi-to-html.git"
+    "url": "https://github.com/rburns/ansi-to-html.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rburns/ansi-to-html/issues"
   },
   "keywords": [
     "ansi",
     "html"
   ],
-  "author": "Rob Burns",
+  "author": {
+    "name": "Rob Burns",
+    "email": "rburns@paiges.net",
+    "url": "http://rburns.paiges.net/"
+  },
   "license": {
     "type": "MIT",
-    "url": "http://github.com/rburns/ansi-to-html/LICENSE"
+    "url": "http://github.com/rburns/ansi-to-html/blob/master/LICENSE"
   },
   "devDependencies": {
     "grunt-simple-mocha": "~0.1.2",
