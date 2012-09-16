@@ -12,9 +12,9 @@ It has a few additions:
 
 	var Convert = require('ansi-to-html');
 
-	var convert = new Convert('\x1b[30mblack\x1b[37mwhite')
+	var convert = new Convert()
 
-	console.log(convert.toHtml());
+	console.log(convert.toHtml('\x1b[30mblack\x1b[37mwhite'));
 
 	/*
 		prints:
