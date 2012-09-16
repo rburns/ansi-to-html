@@ -8,6 +8,10 @@ It has a few additions:
 * ANSI codes for setting the foreground or background color to default are handled. Default foreground and background colors can be set with the <code>fg</code> and <code>bg</code> options.
 * Newlines are converted to <code>&lt;br/&gt;</code> if the <code>newline</code> option is <code>true</code>
 
+## Installation
+
+	npm install ansi-to-html
+
 ## Usage
 
 	var Convert = require('ansi-to-html');
