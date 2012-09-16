@@ -2,14 +2,15 @@ Filter = require '../lib/ansi_to_html.js'
 expect = require('chai').expect
 
 test = (text, result, done) ->
-	expect(new Filter(text).toHtml()).to.equal(result)
+	f = new Filter()
+	expect(f.toHtml(text)).to.equal(result)
 	done()
 
 describe 'ansi to html', () ->
 
 	it "doesn't modify the input string", (done) ->
 		text = 'some text'
-		new Filter(text).toHtml()
+		new Filter().toHtml(text)
 		expect(text).to.equal('some text')
 		done()
 
@@ -111,8 +112,6 @@ describe 'ansi to html', () ->
 	it 'renders newlines when the newline option is true', (done) ->
 		text = 'test\ntest\n'
 		result = 'test<br/>test<br/>'
-		f = new Filter(text, newline: true)
-		expect(f.toHtml()).to.equal(result)
+		f = new Filter(newline: true)
+		expect(f.toHtml(text)).to.equal(result)
 		done()
-
-

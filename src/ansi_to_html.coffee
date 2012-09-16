@@ -70,14 +70,16 @@ defaults =
 	bg: '#000'
 
 class Filter
-	constructor: (input, options = {}) ->
+	constructor: (options = {}) ->
 		@opts = extend({}, defaults, options)
-		@input = if typeof input is 'string' then [input] else input
+		@input = []
 		@stack = []
 
 	toHtml: (input) ->
+		@input = if typeof input is 'string' then [input] else input
 		buf = []
 		@forEach (chunk) -> buf.push chunk
+		@input = []
 		buf.join('')
 
 	forEach: (callback) ->
