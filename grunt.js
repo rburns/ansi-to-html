@@ -18,7 +18,7 @@ module.exports = function(grunt) {
       test: 'test/**/*.coffee'
     },
     watch: {
-      files: '<config:coffee.files>',
+      files: ['src/**/*.coffee', 'test/**/*.coffee'],
       tasks: 'default'
     }
   });
