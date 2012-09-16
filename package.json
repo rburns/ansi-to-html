@@ -1,0 +1,29 @@
+{
+  "name": "ansi-to-html",
+  "version": "0.0.0",
+  "description": "Convert ansi escaped text streams to html.",
+  "main": "lib/ansi_to_html.js",
+  "scripts": {
+    "test": "grunt mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/rburns/ansi-to-html.git"
+  },
+  "keywords": [
+    "ansi",
+    "html"
+  ],
+  "author": "Rob Burns",
+  "license": {
+    "type": "MIT",
+    "url": "http://github.com/rburns/ansi-to-html/LICENSE"
+  },
+  "devDependencies": {
+    "grunt-simple-mocha": "~0.1.2",
+    "grunt-coffee": "0.0.6",
+    "grunt-growl": "~0.1.2",
+    "mocha": "~1.4.2",
+    "chai": "~1.2.0"
+  }
+}
