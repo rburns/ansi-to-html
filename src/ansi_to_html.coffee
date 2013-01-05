@@ -132,6 +132,10 @@ class Filter
 		stack.reverse().map((tag) -> "</#{tag}>").join('')
 
 	tokenize: (text, callback) ->
+
+		ansiMatch = false
+		ansiHandler = 3
+
 		remove = (m) -> ''
 
 		removeXterm256 = (m, g1) ->
@@ -144,6 +148,7 @@ class Filter
 			''
 
 		ansiMess = (m, g1) ->
+			ansiMatch = true
 			g1 = '0' if g1.trim().length is 0
 			g1 = g1.trimRight(';').split(';')
 			callback('display', code) for code in g1
@@ -171,11 +176,15 @@ class Filter
 			{pattern: /^([^\x1b\x08\n]+)/, sub: realText}
  		]
 
+		process = (handler, i) ->
+			# give ansiHandler another chance if it matches
+			if i > ansiHandler and ansiMatch then return else ansiMatch = false
+			matches = text.match(handler.pattern)
+			text = text.replace(handler.pattern, handler.sub)
+			return if !matches?
+
 		while (length = text.length) > 0
-			tokens.forEach (handler) ->
-				matches = text.match(handler.pattern)
-				text = text.replace(handler.pattern, handler.sub)
-				return if !matches?
+			process(handler, i) for handler, i in tokens
 			break if text.length == length
 
 module.exports = Filter

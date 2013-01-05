@@ -115,3 +115,10 @@ describe 'ansi to html', () ->
 		f = new Filter(newline: true)
 		expect(f.toHtml(text)).to.equal(result)
 		done()
+
+	it 'renders two escape sequences in sequence', (done) ->
+		text = '\x1b[1;31mbold_red\x1b[m\x1b[1;32m bold_green\x1b[m normal'
+		result = '<b><span style="color:#A00">bold_red</span></b><b><span style="color:#0A0"> bold_green</span></b> normal'
+		f = new Filter()
+		expect(f.toHtml(text)).to.equal(result)
+		done()
