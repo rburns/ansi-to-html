@@ -117,8 +117,8 @@ describe 'ansi to html', () ->
 		done()
 
 	it 'renders two escape sequences in sequence', (done) ->
-		text = '\x1b[1;31mbold_red\x1b[m\x1b[1;32m bold_green\x1b[m normal'
-		result = '<b><span style="color:#A00">bold_red</span></b><b><span style="color:#0A0"> bold_green</span></b> normal'
+		text = 'months remaining\x1b[1;31mtimes\x1b[m\x1b[1;32mmultiplied by\x1b[m $10'
+		result = 'months remaining<b><span style="color:#A00">times</span></b><b><span style="color:#0A0">multiplied by</span></b> $10'
 		f = new Filter()
 		expect(f.toHtml(text)).to.equal(result)
 		done()
