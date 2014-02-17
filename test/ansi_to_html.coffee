@@ -122,3 +122,13 @@ describe 'ansi to html', () ->
 		f = new Filter()
 		expect(f.toHtml(text)).to.equal(result)
 		done()
+
+	it 'continues colors between render invocations', (done) ->
+		firstText = '\x1b[31mred'
+		secondText = 'also red'
+		result = '<span style="color:#A00">red</span><span style="color:#A00">also red</span>'
+		// If possible this would be better
+		//result = '<span style="color:#A00">redalso red</span>'
+		f = new Filter()
+		expect(f.toHtml(firstText) + f.toHtml(secondText)).to.equal(result)
+		done()
