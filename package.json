@@ -27,6 +27,7 @@
     "url": "http://github.com/rburns/ansi-to-html/blob/master/LICENSE"
   },
   "devDependencies": {
+    "entities": "~1.1.1",
     "grunt-simple-mocha": "~0.1.2",
     "grunt-coffee": "0.0.6",
     "grunt-growl": "~0.1.2",
