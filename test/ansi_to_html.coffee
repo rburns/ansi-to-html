@@ -123,9 +123,9 @@ describe 'ansi to html', () ->
 		expect(f.toHtml(text)).to.equal(result)
 		done()
 
-	it 'escapes html entities', (done) ->
+	it 'escapes XML entities when the escapeXML option is true', (done) ->
 		text = 'normal, \x1b[1;3;31;mbold, <underline>, and red\x1b[0m, normal'
 		result = 'normal, <b><u><span style="color:#A00">bold, &lt;underline&gt;, and red</span></u></b>, normal'
-		f = new Filter(escapeHtml: true)
+		f = new Filter(escapeXML: true)
 		expect(f.toHtml(text)).to.equal(result)
 		done()

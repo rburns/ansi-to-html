@@ -70,7 +70,7 @@ extend = (dest, objs...) ->
 defaults =
 	fg: '#FFF'
 	bg: '#000'
-	escapeHtml: false
+	escapeXML: false
 
 class Filter
 	constructor: (options = {}) ->
@@ -124,7 +124,7 @@ class Filter
 		["<#{tag}", (" style=\"#{style}\"" if style), ">"].join('')
 
 	pushText: (text) ->
-		if @opts.escapeHtml
+		if @opts.escapeXML
 			entities.encodeXML(text)
 		else
 			text
