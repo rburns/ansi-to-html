@@ -22,6 +22,10 @@
     "email": "rburns@paiges.net",
     "url": "http://rburns.paiges.net/"
   },
+  "contributors": [{
+    "name": "Michael",
+    "email": "michael@riesd.com"
+  }],
   "license": {
     "type": "MIT",
     "url": "http://github.com/rburns/ansi-to-html/blob/master/LICENSE"
