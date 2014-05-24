@@ -3,6 +3,8 @@
 # The ansi_to_html module is based on code from
 # https://github.com/rtomayko/bcat/blob/master/lib/bcat/ansi.rb
 
+entities = require "entities"
+
 STYLES =
 	'ef0':	'color:#000'
 	'ef1':	'color:#A00'
@@ -68,6 +70,7 @@ extend = (dest, objs...) ->
 defaults =
 	fg: '#FFF'
 	bg: '#000'
+	escapeXML: false
 
 class Filter
 	constructor: (options = {}) ->
@@ -108,7 +111,7 @@ class Filter
 			buf += chunk
 			@tokenize buf, (tok, data) =>
 				switch tok
-					when 'text' then callback(data)
+					when 'text' then callback @pushText(data)
 					when 'display' then handleDisplay(data)
 					when 'xterm256' then callback @pushStyle("ef#{data}")
 
@@ -119,6 +122,12 @@ class Filter
 		style = STYLES[style] if style.length && style.indexOf(':') == -1
 		@stack.push tag
 		["<#{tag}", (" style=\"#{style}\"" if style), ">"].join('')
+
+	pushText: (text) ->
+		if @opts.escapeXML
+			entities.encodeXML(text)
+		else
+			text
 
 	pushStyle: (style) ->
 		@pushTag "span", style
@@ -155,7 +164,7 @@ class Filter
 			''
 
 		realText = (m) ->
-			callback('text', m)
+			callback 'text', m
 			''
 
 		tokens = [
