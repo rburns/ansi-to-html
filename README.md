@@ -7,6 +7,7 @@ It has a few additions:
 * The API has been altered to accept options in the constructor, and input in <code>toHtml()</code>.
 * ANSI codes for setting the foreground or background color to default are handled. Default foreground and background colors can be set with the <code>fg</code> and <code>bg</code> options.
 * Newlines are converted to <code>&lt;br/&gt;</code> if the <code>newline</code> option is <code>true</code>
+* HTML/XML entitites are generated if the <code>escapeXML</code> option is <code>true</true>
 
 ## Installation
 
