@@ -4,7 +4,7 @@
   "description": "Convert ansi escaped text streams to html.",
   "main": "lib/ansi_to_html.js",
   "scripts": {
-    "test": "grunt mocha"
+    "test": "grunt simplemocha"
   },
   "repository": {
     "type": "git",
