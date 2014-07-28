@@ -63,9 +63,9 @@ toHexString = (num) ->
   STYLES["eb#{c}"] = "background-color:##{l}#{l}#{l}"
 
 extend = (dest, objs...) ->
-        for obj in objs
-                dest[k] = v for k, v of obj
-        dest
+  for obj in objs
+    dest[k] = v for k, v of obj
+  dest
 
 defaults =
   fg: '#FFF'
