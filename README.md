@@ -25,3 +25,26 @@ It has a few additions:
 		prints:
 		<span style="color:#000">black<span style="color:#AAA">white</span></span>
 	*/
+
+## Development
+
+Once you have the git repository cloned, install the dependencies:
+
+	cd ansi-to-html
+	npm install
+
+If you don't have it already, install the grunt command-line tool:
+
+	npm install -g grunt-cli
+
+Build the JS files from coffeescript:
+
+	grunt coffee
+
+... then run tests:
+
+	npm test
+
+You can also run tests this way:
+
+	grunt simplemocha
