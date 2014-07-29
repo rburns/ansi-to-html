@@ -39,7 +39,6 @@ If you don't have it already, install the grunt command-line tool:
 
 Use Grunt to build and test:
 
-```
 	# build and test
 	grunt
 
@@ -49,4 +48,3 @@ Use Grunt to build and test:
 	# or separately
 	grunt coffee
 	grunt simplemocha  # or npm test
-```
