@@ -37,14 +37,16 @@ If you don't have it already, install the grunt command-line tool:
 
 	npm install -g grunt-cli
 
-Build the JS files from coffeescript:
+Use Grunt to build and test:
 
+```
+	# build and test
+	grunt
+
+	# all the time
+	grunt watch
+
+	# or separately
 	grunt coffee
-
-... then run tests:
-
-	npm test
-
-You can also run tests this way:
-
-	grunt simplemocha
+	grunt simplemocha  # or npm test
+```
