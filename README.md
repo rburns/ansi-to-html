@@ -37,14 +37,15 @@ If you don't have it already, install the grunt command-line tool:
 
 	npm install -g grunt-cli
 
-Use Grunt to build and test:
+Build and test
 
-	# build and test
 	grunt
 
-	# all the time
+All the time
+
 	grunt watch
 
-	# or separately
+Or separately
+
 	grunt coffee
 	grunt simplemocha  # or npm test
