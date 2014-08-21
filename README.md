@@ -15,16 +15,18 @@ It has a few additions:
 
 ## Usage
 
-	var Convert = require('ansi-to-html');
+```js
+var Convert = require('ansi-to-html');
 
-	var convert = new Convert()
+var convert = new Convert()
 
-	console.log(convert.toHtml('\x1b[30mblack\x1b[37mwhite'));
+console.log(convert.toHtml('\x1b[30mblack\x1b[37mwhite'));
 
-	/*
-		prints:
-		<span style="color:#000">black<span style="color:#AAA">white</span></span>
-	*/
+/*
+	prints:
+	<span style="color:#000">black<span style="color:#AAA">white</span></span>
+*/
+```
 
 ## Development
 
