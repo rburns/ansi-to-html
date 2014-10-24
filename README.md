@@ -17,7 +17,12 @@ It has a few additions:
 
 	var Convert = require('ansi-to-html');
 
-	var convert = new Convert()
+	var convert = new Convert();
+
+	/* 
+		Or with options in the constructor
+		var convert = new Convert({newLine: true, fg: 'white', bg: 'black'});
+	*/
 
 	console.log(convert.toHtml('\x1b[30mblack\x1b[37mwhite'));
 
