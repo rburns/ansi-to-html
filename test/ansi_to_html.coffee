@@ -141,7 +141,7 @@ describe 'ansi to html', () ->
 			test(text, result, done)
 
 		it 'drops EL code with 2 parameter', (done) ->
-			text = '\x2b[1Khello'
+			text = '\x1b[2Khello'
 			result = 'hello'
 			test(text, result, done)
 
