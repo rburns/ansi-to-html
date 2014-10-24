@@ -170,6 +170,7 @@ class Filter
 		tokens = [
 			# characters to remove completely
 			{pattern: /^\x08+/, sub: remove}
+			{pattern: /^\x1b\[[012]?K/, sub: remove}
 			{pattern: /^\x1b\[38;5;(\d+)m/, sub: removeXterm256}
 
 			# newlines
