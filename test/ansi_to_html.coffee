@@ -139,3 +139,13 @@ describe 'ansi to html', () ->
 			text = 'test\ntest\n'
 			result = 'test<br/>test<br/>'
 			test(text, result, done, newline: true)
+
+	describe 'with stream option enabled', () ->
+
+		it 'continues colors between render invocations', (done) ->
+			firstText = '\x1b[31mred'
+			secondText = 'also red'
+			result = '<span style="color:#A00">red</span><span style="color:#A00">also red</span>'
+			f = new Filter({stream: true})
+			expect(f.toHtml(firstText) + f.toHtml(secondText)).to.equal(result)
+			done()
