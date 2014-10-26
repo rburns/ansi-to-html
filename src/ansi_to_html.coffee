@@ -77,10 +77,13 @@ class Filter
 		@opts = extend({}, defaults, options)
 		@input = []
 		@stack = []
+		@stickyStack = []
 
 	toHtml: (input) ->
 		@input = if typeof input is 'string' then [input] else input
 		buf = []
+		@stickyStack.forEach (element) =>
+			@generateOutput(element.token, element.data, (chunk) -> buf.push chunk)
 		@forEach (chunk) -> buf.push chunk
 		@input = []
 		buf.join('')
@@ -88,35 +91,42 @@ class Filter
 	forEach: (callback) ->
 		buf = ''
 
-		handleDisplay = (code) =>
-			code = parseInt code, 10
-			if code is -1 then callback '<br/>'
-			if code is 0 then callback @resetStyles() if @stack.length
-			if code is 1 then callback @pushTag('b')
-			if code is 2 then
-			if 2 < code < 5 then callback @pushTag('u')
-			if 4 < code < 7 then callback @pushTag('blink')
-			if code is 7 then
-			if code is 8 then callback @pushStyle('display:none')
-			if code is 9 then callback @pushTag('strike')
-			if code is 24 then callback @closeTag('u')
-			if 29 < code < 38 then callback @pushStyle("ef#{code - 30}")
-			if code is 39 then callback @pushStyle("color:#{@opts.fg}")
-			if 39 < code < 48 then callback @pushStyle("eb#{code - 40}")
-			if code is 49 then callback @pushStyle("background-color:#{@opts.bg}")
-			if 89 < code < 98 then callback @pushStyle("ef#{8 + (code - 90)}")
-			if 99 < code < 108 then callback @pushStyle("eb#{8 + (code - 100)}")
-
 		@input.forEach (chunk) =>
 			buf += chunk
-			@tokenize buf, (tok, data) =>
-				switch tok
-					when 'text' then callback @pushText(data)
-					when 'display' then handleDisplay(data)
-					when 'xterm256' then callback @pushStyle("ef#{data}")
+			@tokenize buf, (token, data) =>
+				@generateOutput(token, data, callback)
+				@updateStickyStack(token, data) if @opts.stream
 
 		#callback buf if buf.length
 		callback @resetStyles() if @stack.length
+
+	generateOutput: (token, data, callback) ->
+		switch token
+			when 'text' then callback @pushText(data)
+			when 'display' then @handleDisplay(data, callback)
+			when 'xterm256' then callback @pushStyle("ef#{data}")
+
+	updateStickyStack: (token, data) ->
+		@stickyStack.push({token: token, data: data}) unless token is 'text'
+
+	handleDisplay: (code, callback) ->
+		code = parseInt code, 10
+		if code is -1 then callback '<br/>'
+		if code is 0 then callback @resetStyles() if @stack.length
+		if code is 1 then callback @pushTag('b')
+		if code is 2 then
+		if 2 < code < 5 then callback @pushTag('u')
+		if 4 < code < 7 then callback @pushTag('blink')
+		if code is 7 then
+		if code is 8 then callback @pushStyle('display:none')
+		if code is 9 then callback @pushTag('strike')
+		if code is 24 then callback @closeTag('u')
+		if 29 < code < 38 then callback @pushStyle("ef#{code - 30}")
+		if code is 39 then callback @pushStyle("color:#{@opts.fg}")
+		if 39 < code < 48 then callback @pushStyle("eb#{code - 40}")
+		if code is 49 then callback @pushStyle("background-color:#{@opts.bg}")
+		if 89 < code < 98 then callback @pushStyle("ef#{8 + (code - 90)}")
+		if 99 < code < 108 then callback @pushStyle("eb#{8 + (code - 100)}")
 
 	pushTag: (tag, style = '') ->
 		style = STYLES[style] if style.length && style.indexOf(':') == -1
