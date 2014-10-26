@@ -106,7 +106,11 @@ class Filter
 			when 'xterm256' then callback @pushStyle("ef#{data}")
 
 	updateStickyStack: (token, data) ->
-		@stickyStack.push({token: token, data: data}) unless token is 'text'
+		notCategory = (category) -> (e) -> category is null or e.category != category
+
+		if token isnt 'text'
+			@stickyStack = @stickyStack.filter(notCategory(@categoryForCode(data)))
+			@stickyStack.push({token: token, data: data, category: @categoryForCode(data)})
 
 	handleDisplay: (code, callback) ->
 		code = parseInt code, 10
@@ -126,6 +130,20 @@ class Filter
 		if code is 49 then callback @pushStyle("background-color:#{@opts.bg}")
 		if 89 < code < 98 then callback @pushStyle("ef#{8 + (code - 90)}")
 		if 99 < code < 108 then callback @pushStyle("eb#{8 + (code - 100)}")
+
+	categoryForCode: (code) ->
+		code = parseInt code, 10
+		if code is 0 then 'all'
+		else if code is 1 then 'bold'
+		else if 2 < code < 5 then 'underline'
+		else if 4 < code < 7 then 'blink'
+		else if code is 8 then 'hide'
+		else if code is 9 then 'strike'
+		else if 29 < code < 38 or code is 39 or 39 < code < 48 or 89 < code < 98
+			'foreground-color'
+		else if code is 49 or 99 < code < 108
+			'background-color'
+		else null
 
 	pushTag: (tag, style = '') ->
 		style = STYLES[style] if style.length && style.indexOf(':') == -1

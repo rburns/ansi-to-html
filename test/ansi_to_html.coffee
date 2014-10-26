@@ -155,3 +155,10 @@ describe 'ansi to html', () ->
 			result = '<span style="color:#A00">red</span><span style="color:' +
 				'#A00">also red</span><span style="color:#A00">and red</span>'
 			test(text, result, done, stream: true)
+
+		it 'does not persist styles beyond their usefulness', (done) ->
+			text = ['\x1b[31mred', 'also red', '\x1b[30mblack', 'and black']
+			result = '<span style="color:#A00">red</span><span style="color:' +
+				'#A00">also red</span><span style="color:#A00"><span style="color:' +
+				'#000">black</span></span><span style="color:#000">and black</span>'
+			test(text, result, done, stream: true)
