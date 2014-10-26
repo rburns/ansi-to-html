@@ -139,9 +139,9 @@ class Filter
 		else if 4 < code < 7 then 'blink'
 		else if code is 8 then 'hide'
 		else if code is 9 then 'strike'
-		else if 29 < code < 38 or code is 39 or 39 < code < 48 or 89 < code < 98
+		else if 29 < code < 38 or code is 39 or 89 < code < 98
 			'foreground-color'
-		else if code is 49 or 99 < code < 108
+		else if 39 < code < 48 or code is 49 or 99 < code < 108
 			'background-color'
 		else null
 
