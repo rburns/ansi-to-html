@@ -127,6 +127,26 @@ describe 'ansi to html', () ->
 				   '</b><b><span style="color:#0A0">multiplied by</span></b> $10'
 			test(text, result, done)
 
+		it 'drops EL code with no parameter', (done) ->
+			text = '\x1b[Khello'
+			result = 'hello'
+			test(text, result, done)
+
+		it 'drops EL code with 0 parameter', (done) ->
+			text = '\x1b[0Khello'
+			result = 'hello'
+			test(text, result, done)
+
+		it 'drops EL code with 1 parameter', (done) ->
+			text = '\x1b[1Khello'
+			result = 'hello'
+			test(text, result, done)
+
+		it 'drops EL code with 2 parameter', (done) ->
+			text = '\x1b[2Khello'
+			result = 'hello'
+			test(text, result, done)
+
 	describe 'with escapeXML option enabled', () ->
 
 		it 'escapes XML entities', (done) ->
