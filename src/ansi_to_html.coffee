@@ -97,7 +97,6 @@ class Filter
 				@generateOutput(token, data, callback)
 				@updateStickyStack(token, data) if @opts.stream
 
-		#callback buf if buf.length
 		callback @resetStyles() if @stack.length
 
 	generateOutput: (token, data, callback) ->
