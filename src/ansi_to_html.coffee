@@ -106,7 +106,8 @@ class Filter
 			when 'xterm256' then callback @pushStyle("ef#{data}")
 
 	updateStickyStack: (token, data) ->
-		notCategory = (category) -> (e) -> category is null or e.category != category
+		notCategory = (category) -> (e) ->
+			(category is null or e.category != category) and category isnt 'all'
 
 		if token isnt 'text'
 			@stickyStack = @stickyStack.filter(notCategory(@categoryForCode(data)))
