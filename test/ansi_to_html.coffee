@@ -3,7 +3,9 @@ expect = require('chai').expect
 
 test = (text, result, done, opts = {}) ->
 	f = new Filter(opts)
-	expect(f.toHtml(text)).to.equal(result)
+	filtered = (memo, t) -> memo += f.toHtml(t)
+	text = if typeof text.reduce is 'function' then text else [text]
+	expect(text.reduce(filtered, '')).to.equal(result)
 	done()
 
 describe 'ansi to html', () ->
