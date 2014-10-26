@@ -63,9 +63,9 @@ toHexString = (num) ->
 	STYLES["eb#{c}"] = "background-color:##{l}#{l}#{l}"
 
 extend = (dest, objs...) ->
-        for obj in objs
-                dest[k] = v for k, v of obj
-        dest
+	for obj in objs
+		dest[k] = v for k, v of obj
+	dest
 
 defaults =
 	fg: '#FFF'
@@ -124,10 +124,8 @@ class Filter
 		["<#{tag}", (" style=\"#{style}\"" if style), ">"].join('')
 
 	pushText: (text) ->
-		if @opts.escapeXML
-			entities.encodeXML(text)
-		else
-			text
+		if @opts.escapeXML then entities.encodeXML(text)
+		else text
 
 	pushStyle: (style) ->
 		@pushTag "span", style
