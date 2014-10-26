@@ -149,3 +149,9 @@ describe 'ansi to html', () ->
 			result = '<span style="color:#A00">red</span><span style="color:' +
 				'#A00">also red</span>'
 			test(text, result, done, stream: true)
+
+		it 'persists styles between more than two toHtml() invocations', (done) ->
+			text = ['\x1b[31mred', 'also red', 'and red']
+			result = '<span style="color:#A00">red</span><span style="color:' +
+				'#A00">also red</span><span style="color:#A00">and red</span>'
+			test(text, result, done, stream: true)
