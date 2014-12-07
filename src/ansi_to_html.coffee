@@ -70,7 +70,9 @@ extend = (dest, objs...) ->
 defaults =
 	fg: '#FFF'
 	bg: '#000'
+	newLine: false
 	escapeXML: false
+	stream: false
 
 class Filter
 	constructor: (options = {}) ->
