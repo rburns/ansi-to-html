@@ -1,6 +1,6 @@
 {
   "name": "ansi-to-html",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Convert ansi escaped text streams to html.",
   "main": "lib/ansi_to_html.js",
   "scripts": {
