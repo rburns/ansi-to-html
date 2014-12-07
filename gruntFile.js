@@ -8,7 +8,8 @@ module.exports = function(grunt) {
 	// Project configuration.
 	grunt.initConfig({
 		simplemocha: {
-			all: ['test/ansi_to_html.js']
+			all: ['test/ansi_to_html.js'],
+			options: {reporter: 'tap'}
 		},
 		coffee: {
 			src: {

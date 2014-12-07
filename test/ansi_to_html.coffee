@@ -3,7 +3,9 @@ expect = require('chai').expect
 
 test = (text, result, done, opts = {}) ->
 	f = new Filter(opts)
-	expect(f.toHtml(text)).to.equal(result)
+	filtered = (memo, t) -> memo += f.toHtml(t)
+	text = if typeof text.reduce is 'function' then text else [text]
+	expect(text.reduce(filtered, '')).to.equal(result)
 	done()
 
 describe 'ansi to html', () ->
@@ -159,3 +161,31 @@ describe 'ansi to html', () ->
 			text = 'test\ntest\n'
 			result = 'test<br/>test<br/>'
 			test(text, result, done, newline: true)
+
+	describe 'with stream option enabled', () ->
+
+		it 'persists styles between toHtml() invocations', (done) ->
+			text = ['\x1b[31mred', 'also red']
+			result = '<span style="color:#A00">red</span><span style="color:' +
+				'#A00">also red</span>'
+			test(text, result, done, stream: true)
+
+		it 'persists styles between more than two toHtml() invocations', (done) ->
+			text = ['\x1b[31mred', 'also red', 'and red']
+			result = '<span style="color:#A00">red</span><span style="color:' +
+				'#A00">also red</span><span style="color:#A00">and red</span>'
+			test(text, result, done, stream: true)
+
+		it 'does not persist styles beyond their usefulness', (done) ->
+			text = ['\x1b[31mred', 'also red', '\x1b[30mblack', 'and black']
+			result = '<span style="color:#A00">red</span><span style="color:' +
+				'#A00">also red</span><span style="color:#A00"><span style="color:' +
+				'#000">black</span></span><span style="color:#000">and black</span>'
+			test(text, result, done, stream: true)
+
+		it 'removes all state when encountering a reset', (done) ->
+			text = ['\x1b[1mthis is bold\x1b[0m, but this isn\'t', ' nor is this']
+			result = '<b>this is bold</b>, but this isn\'t nor is this'
+			test(text, result, done, stream: true)
+
+
