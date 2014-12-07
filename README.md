@@ -26,20 +26,17 @@ It has a few additions:
 
 ## Options
 
-	Options can be be passed to the constructor to customize behaviour.
+Options can be be passed to the constructor to customize behaviour.
 
-	fg - CSS color values - The default foreground color used when reset color codes are
-	encountered.
+**fg** <code>CSS color values</code> The default foreground color used when reset color codes are encountered.
 
-	bg - CSS color values - The default background color used when reset color codes are
-	encountered.
+**bg** <code>CSS color values</code> The default background color used when reset color codes are encountered.
 
-	newLine - true or false - Convert newline characters to <code>&lt;br/&gt;</code>.
+**newLine** <code>true or false</code> Convert newline characters to <code>&lt;br/&gt;</code>.
 
-	escapeXML true or false - Generate HTML/XML entities.
+**escapeXML** <code>true or false</code> Generate HTML/XML entities.
 
-	stream - true or false - save style state across invocations of toHtml(). Intended to be used
-	with streams.
+**stream** <code>true or false</code> save style state across invocations of toHtml().
 
 ## Development
 
