@@ -70,7 +70,7 @@ extend = (dest, objs...) ->
 defaults =
 	fg: '#FFF'
 	bg: '#000'
-	newLine: false
+	newline: false
 	escapeXML: false
 	stream: false
 
