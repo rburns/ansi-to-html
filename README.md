@@ -32,7 +32,7 @@ Options can be be passed to the constructor to customize behaviour.
 
 **bg** <code>CSS color values</code> The default background color used when reset color codes are encountered.
 
-**newLine** <code>true or false</code> Convert newline characters to <code>&lt;br/&gt;</code>.
+**newline** <code>true or false</code> Convert newline characters to <code>&lt;br/&gt;</code>.
 
 **escapeXML** <code>true or false</code> Generate HTML/XML entities.
 
