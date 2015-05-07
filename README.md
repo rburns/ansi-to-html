@@ -1,4 +1,6 @@
-## Ansi to Html
+## Ansi to Html 
+
+![](https://img.shields.io/npm/v/ansi-to-html.svg) ![](https://img.shields.io/npm/dm/ansi-to-html.svg) ![](https://img.shields.io/travis/rburns/ansi-to-html.svg) 
 
 This is a port of the ansi to html converter from [bcat](https://github.com/rtomayko/bcat/blob/master/lib/bcat/ansi.rb) to Javascript.
 
@@ -39,6 +41,9 @@ Options can be be passed to the constructor to customize behaviour.
 **stream** <code>true or false</code> save style state across invocations of toHtml().
 
 ## Development
+
+[![](http://issuestats.com/github/rburns/ansi-to-html/badge/issue?style=flat)](http://issuestats.com/github/rburns/ansi-to-html)
+[![](http://issuestats.com/github/rburns/ansi-to-html/badge/pr?style=flat)](http://issuestats.com/github/rburns/ansi-to-html)
 
 Once you have the git repository cloned, install the dependencies:
 
