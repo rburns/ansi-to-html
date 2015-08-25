@@ -6,38 +6,38 @@
 entities = require "entities"
 
 STYLES =
-	'ef0':	'color:#000'
-	'ef1':	'color:#A00'
-	'ef2':	'color:#0A0'
-	'ef3':	'color:#A50'
-	'ef4':	'color:#00A'
-	'ef5':	'color:#A0A'
-	'ef6':	'color:#0AA'
-	'ef7':	'color:#AAA'
-	'ef8':	'color:#555'
-	'ef9':	'color:#F55'
-	'ef10':	'color:#5F5'
-	'ef11':	'color:#FF5'
-	'ef12':	'color:#55F'
-	'ef13':	'color:#F5F'
-	'ef14':	'color:#5FF'
-	'ef15':	'color:#FFF'
-	'eb0':	'background-color:#000'
-	'eb1':	'background-color:#A00'
-	'eb2':	'background-color:#0A0'
-	'eb3':	'background-color:#A50'
-	'eb4':	'background-color:#00A'
-	'eb5':	'background-color:#A0A'
-	'eb6':	'background-color:#0AA'
-	'eb7':	'background-color:#AAA'
-	'eb8':	'background-color:#555'
-	'eb9':	'background-color:#F55'
-	'eb10':	'background-color:#5F5'
-	'eb11':	'background-color:#FF5'
-	'eb12':	'background-color:#55F'
-	'eb13':	'background-color:#F5F'
-	'eb14':	'background-color:#5FF'
-	'eb15':	'background-color:#FFF'
+	'ef0':	'color:#000' # black
+	'ef1':	'color:#A00' # dark red
+	'ef2':	'color:#0A0' # dark green
+	'ef3':	'color:#A50' # dark yellow
+	'ef4':	'color:#00A' # dark blue
+	'ef5':	'color:#A0A' # dark magenta
+	'ef6':	'color:#0AA' # dark cyan
+	'ef7':	'color:#AAA' # dark light gray
+	'ef8':	'color:#555' # gray
+	'ef9':	'color:#F55' # red
+	'ef10':	'color:#5F5' # green
+	'ef11':	'color:#FF5' # yellow
+	'ef12':	'color:#55F' # blue
+	'ef13':	'color:#F5F' # magenta
+	'ef14':	'color:#5FF' # cyan
+	'ef15':	'color:#FFF' # white
+	'eb0':	'background-color:#000' # black
+	'eb1':	'background-color:#A00' # dark red
+	'eb2':	'background-color:#0A0' # dark green
+	'eb3':	'background-color:#A50' # dark yellow
+	'eb4':	'background-color:#00A' # dark blue
+	'eb5':	'background-color:#A0A' # dark magenta
+	'eb6':	'background-color:#0AA' # dark cyan
+	'eb7':	'background-color:#AAA' # dark light gray
+	'eb8':	'background-color:#555' # gray
+	'eb9':	'background-color:#F55' # red
+	'eb10':	'background-color:#5F5' # green
+	'eb11':	'background-color:#FF5' # yellow
+	'eb12':	'background-color:#55F' # blue
+	'eb13':	'background-color:#F5F' # magenta
+	'eb14':	'background-color:#5FF' # cyan
+	'eb15':	'background-color:#FFF' # white
 
 toHexString = (num) ->
 	num = num.toString(16)
