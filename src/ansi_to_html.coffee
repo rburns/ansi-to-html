@@ -21,7 +21,7 @@ STYLES =
 	'ef12':	'color:#3465a4' # blue
 	'ef13':	'color:#ad7fa8' # magenta
 	'ef14':	'color:#2bd0d0' # cyan
-	'ef15':	'color:#FFF' # white
+	'ef15':	'color:#fff' # white
 	'eb0':	'background-color:#000' # black
 	'eb1':	'background-color:#df4f3e' # dark red
 	'eb2':	'background-color:#8ae234' # dark green
@@ -37,7 +37,7 @@ STYLES =
 	'eb12':	'background-color:#3465a4' # blue
 	'eb13':	'background-color:#ad7fa8' # magenta
 	'eb14':	'background-color:#2bd0d0' # cyan
-	'eb15':	'background-color:#FFF' # white
+	'eb15':	'background-color:#fff' # white
 
 toHexString = (num) ->
 	num = num.toString(16)
