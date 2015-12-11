@@ -40,12 +40,23 @@ Options can be be passed to the constructor to customize behaviour.
 
 **stream** <code>true or false</code> save style state across invocations of toHtml().
 
+### Default options
+
+```coffee
+fg: '#FFF'
+bg: '#000'
+newline: false
+escapeXML: false
+stream: false
+```
+
 ## Development
 
 [![](http://issuestats.com/github/rburns/ansi-to-html/badge/issue?style=flat)](http://issuestats.com/github/rburns/ansi-to-html)
 [![](http://issuestats.com/github/rburns/ansi-to-html/badge/pr?style=flat)](http://issuestats.com/github/rburns/ansi-to-html)
 
 Once you have the git repository cloned, install the dependencies:
+
 
 	cd ansi-to-html
 	npm install
