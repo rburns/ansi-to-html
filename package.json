@@ -43,5 +43,8 @@
   "dependencies": {
     "entities": "^1.1.1"
     "karg": "^0.1.32"
+  },
+  "bin": {
+    "ansi-to-html": "./bin/ansi-to-html"
   }
 }
