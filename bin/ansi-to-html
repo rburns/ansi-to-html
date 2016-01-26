@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require('../src/a2h.js');
+require('../lib/cli.js');
