@@ -29,10 +29,7 @@
     "name": "Yoram Grahame",
     "email": "yoz@yoz.com"
   }],
-  "license": {
-    "type": "MIT",
-    "url": "http://github.com/rburns/ansi-to-html/blob/master/LICENSE"
-  },
+  "license":  "MIT",
   "devDependencies": {
     "chai": "~1.2.0",
     "grunt": "~0.4.1",
