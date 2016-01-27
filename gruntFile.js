@@ -16,6 +16,10 @@ module.exports = function(grunt) {
 				src: 'src/ansi_to_html.coffee',
 				dest: 'lib/ansi_to_html.js'
 			},
+			cli: {
+				src: 'src/cli.coffee',
+				dest: 'lib/cli.js'
+			},
 			test: {
 				src: 'test/ansi_to_html.coffee',
 				dest: 'test/ansi_to_html.js'
