@@ -26,8 +26,8 @@
     "name": "Michael",
     "email": "michael@riesd.com"
   }, {
-	"name": "Yoram Grahame",
-	"email": "yoz@yoz.com"
+    "name": "Yoram Grahame",
+    "email": "yoz@yoz.com"
   }],
   "license": {
     "type": "MIT",
