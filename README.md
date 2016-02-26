@@ -1,6 +1,6 @@
-## Ansi to Html 
+## Ansi to Html
 
-![](https://img.shields.io/npm/v/ansi-to-html.svg) ![](https://img.shields.io/npm/dm/ansi-to-html.svg) ![](https://img.shields.io/travis/rburns/ansi-to-html.svg) 
+![](https://img.shields.io/npm/v/ansi-to-html.svg) ![](https://img.shields.io/npm/dm/ansi-to-html.svg) ![](https://img.shields.io/travis/rburns/ansi-to-html.svg)
 
 This is a port of the ansi to html converter from [bcat](https://github.com/rtomayko/bcat/blob/master/lib/bcat/ansi.rb) to Javascript.
 
@@ -25,6 +25,20 @@ It has a few additions:
 		prints:
 		<span style="color:#000">black<span style="color:#AAA">white</span></span>
 	*/
+
+## Command line usage
+
+Process a file:
+
+```bash
+ansi-to-html the_filename
+```
+
+From STDIN:
+
+```bash
+git log | ansi-to-html
+```
 
 ## Options
 
@@ -56,7 +70,6 @@ stream: false
 [![](http://issuestats.com/github/rburns/ansi-to-html/badge/pr?style=flat)](http://issuestats.com/github/rburns/ansi-to-html)
 
 Once you have the git repository cloned, install the dependencies:
-
 
 	cd ansi-to-html
 	npm install
