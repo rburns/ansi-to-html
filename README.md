@@ -40,6 +40,9 @@ From STDIN:
 git log | ansi-to-html
 ```
 
+When using ansi-to-html from the command line the stream option is set to `true`. Other options can
+be provided. See `ansi-to-html -h` for more detail.
+
 ## Options
 
 Options can be be passed to the constructor to customize behaviour.
