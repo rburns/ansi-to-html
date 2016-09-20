@@ -1,6 +1,6 @@
 {
   "name": "ansi-to-html",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Convert ansi escaped text streams to html.",
   "main": "lib/ansi_to_html.js",
   "engines": { "node": "*" },
@@ -27,8 +27,8 @@
     "name": "Michael",
     "email": "michael@riesd.com"
   }, {
-	"name": "Thorsten Kohnhorst",
-	"email": "monsterkodi@gmx.net"
+    "name": "Thorsten Kohnhorst",
+    "email": "monsterkodi@gmx.net"
   }, {
     "name": "Yoram Grahame",
     "email": "yoz@yoz.com"
@@ -42,8 +42,7 @@
     "grunt-simple-mocha": "~0.4.1"
   },
   "dependencies": {
-    "entities": "^1.1.1",
-    "karg": "^1.0.4"
+    "entities": "^1.1.1"
   },
   "bin": {
     "ansi-to-html": "./bin/ansi-to-html"
