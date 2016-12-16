@@ -120,6 +120,11 @@ describe 'ansi to html', () ->
 			result = 'underline: <u>stuff</u>things'
 			test(text, result, done)
 
+		it 'is able to skip disabling underline', (done) ->
+			text = 'not underline: stuff\x1b[24mthings'
+			result = 'not underline: stuffthings'
+			test(text, result, done)
+
 		it 'renders two escape sequences in sequence', (done) ->
 			text = 'months remaining\x1b[1;31mtimes\x1b[m\x1b[1;32mmultiplied' +
 				' by\x1b[m $10'
