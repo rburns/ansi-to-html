@@ -162,8 +162,18 @@ describe 'ansi to html', () ->
 			result = '<b>Hello</b> World'
 			test(text, result, done)
 
-		it 'does not render un-bold code appropriately', (done) ->
+		it 'skips rendering un-bold code appropriately', (done) ->
 			text = 'Hello\x1b[22m World'
+			result = 'Hello World'
+			test(text, result, done)
+
+		it 'renders un-italic code appropriately', (done) ->
+			text = '\x1b[3mHello\x1b[23m World'
+			result = '<i>Hello</i> World'
+			test(text, result, done)
+
+		it 'skips rendering un-italic code appropriately', (done) ->
+			text = 'Hello\x1b[23m World'
 			result = 'Hello World'
 			test(text, result, done)
 
