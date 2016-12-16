@@ -162,6 +162,11 @@ describe 'ansi to html', () ->
 			result = 'test<br/>test<br/>'
 			test(text, result, done, newline: true)
 
+		it 'renders multiple line breaks', (done) ->
+			text = 'test\n\ntest\n'
+			result = 'test<br/><br/>test<br/>'
+			test(text, result, done, newline: true)
+
 	describe 'with stream option enabled', () ->
 
 		it 'persists styles between toHtml() invocations', (done) ->
