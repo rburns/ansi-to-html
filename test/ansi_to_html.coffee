@@ -56,7 +56,7 @@ describe 'ansi to html', () ->
 			test(text, result, done)
 
 		it 'renders underline', (done) ->
-			text = 'underline: \x1b[3mstuff'
+			text = 'underline: \x1b[4mstuff'
 			result = 'underline: <u>stuff</u>'
 			test(text, result, done)
 
@@ -71,7 +71,7 @@ describe 'ansi to html', () ->
 			test(text, result, done)
 
 		it 'handles multiple resets', (done) ->
-			text = 'normal, \x1b[1mbold, \x1b[3munderline, \x1b[31mred\x1b[0m, normal'
+			text = 'normal, \x1b[1mbold, \x1b[4munderline, \x1b[31mred\x1b[0m, normal'
 			result = 'normal, <b>bold, <u>underline, <span style="color:' +
 				'#A00">red</span></u></b>, normal'
 			test(text, result, done)
@@ -82,13 +82,13 @@ describe 'ansi to html', () ->
 			test(text, result, done)
 
 		it 'renders multi-attribute sequences', (done) ->
-			text = 'normal, \x1b[1;3;31mbold, underline, and red\x1b[0m, normal'
+			text = 'normal, \x1b[1;4;31mbold, underline, and red\x1b[0m, normal'
 			result = 'normal, <b><u><span style="color:#A00">bold, underline,' +
 				' and red</span></u></b>, normal'
 			test(text, result, done)
 
 		it 'renders multi-attribute sequences with a semi-colon', (done) ->
-			text = 'normal, \x1b[1;3;31;mbold, underline, and red\x1b[0m, normal'
+			text = 'normal, \x1b[1;4;31;mbold, underline, and red\x1b[0m, normal'
 			result = 'normal, <b><u><span style="color:#A00">bold, underline, ' +
 				'and red</span></u></b>, normal'
 			test(text, result, done)
@@ -165,7 +165,7 @@ describe 'ansi to html', () ->
 	describe 'with escapeXML option enabled', () ->
 
 		it 'escapes XML entities', (done) ->
-			text = 'normal, \x1b[1;3;31;mbold, <underline>, and red\x1b[0m, normal'
+			text = 'normal, \x1b[1;4;31;mbold, <underline>, and red\x1b[0m, normal'
 			result = 'normal, <b><u><span style="color:#A00">bold, &lt;underline' +
 				'&gt;, and red</span></u></b>, normal'
 			test(text, result, done, escapeXML: true)
