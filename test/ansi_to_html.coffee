@@ -147,6 +147,16 @@ describe 'ansi to html', () ->
 			result = 'hello'
 			test(text, result, done)
 
+		it 'renders un-bold code appropriately', (done) ->
+			text = '\x1b[1mHello\x1b[22m World'
+			result = '<b>Hello</b> World'
+			test(text, result, done)
+
+		it 'does not render un-bold code appropriately', (done) ->
+			text = 'Hello\x1b[22m World'
+			result = 'Hello World'
+			test(text, result, done)
+
 	describe 'with escapeXML option enabled', () ->
 
 		it 'escapes XML entities', (done) ->
