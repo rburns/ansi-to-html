@@ -65,6 +65,11 @@ describe 'ansi to html', () ->
 			result = 'bold: <b>stuff</b>'
 			test(text, result, done)
 
+		it 'renders italic', (done) ->
+			text = 'italic: \x1b[3mstuff'
+			result = 'italic: <i>stuff</i>'
+			test(text, result, done)
+
 		it 'handles ressets', (done) ->
 			text = '\x1b[1mthis is bold\x1b[0m, but this isn\'t'
 			result = '<b>this is bold</b>, but this isn\'t'

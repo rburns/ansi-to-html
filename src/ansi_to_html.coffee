@@ -121,7 +121,8 @@ class Filter
 		if code is 0 then callback @resetStyles() if @stack.length
 		if code is 1 then callback @pushTag('b')
 		if code is 2 then
-		if 2 < code < 5 then callback @pushTag('u')
+		if code is 3 then callback @pushTag('i')
+		if code is 4 then callback @pushTag('u')
 		if 4 < code < 7 then callback @pushTag('blink')
 		if code is 7 then
 		if code is 8 then callback @pushStyle('display:none')
