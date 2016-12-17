@@ -121,11 +121,14 @@ class Filter
 		if code is 0 then callback @resetStyles() if @stack.length
 		if code is 1 then callback @pushTag('b')
 		if code is 2 then
-		if 2 < code < 5 then callback @pushTag('u')
+		if code is 3 then callback @pushTag('i')
+		if code is 4 then callback @pushTag('u')
 		if 4 < code < 7 then callback @pushTag('blink')
 		if code is 7 then
 		if code is 8 then callback @pushStyle('display:none')
 		if code is 9 then callback @pushTag('strike')
+		if code is 22 then callback @closeTag('b')
+		if code is 23 then callback @closeTag('i')
 		if code is 24 then callback @closeTag('u')
 		if 29 < code < 38 then callback @pushStyle("ef#{code - 30}")
 		if code is 39 then callback @pushStyle("color:#{@opts.fg}")
@@ -202,7 +205,7 @@ class Filter
 			{pattern: /^\x1b\[38;5;(\d+)m/, sub: removeXterm256}
 
 			# newlines
-			{pattern: /^\n+/, sub: newline}
+			{pattern: /^\n/, sub: newline}
 
 			# ansi escape sequences that mess with the display
 			{pattern: /^\x1b\[((?:\d{1,3};?)+|)m/, sub: ansiMess}

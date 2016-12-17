@@ -56,7 +56,7 @@ describe 'ansi to html', () ->
 			test(text, result, done)
 
 		it 'renders underline', (done) ->
-			text = 'underline: \x1b[3mstuff'
+			text = 'underline: \x1b[4mstuff'
 			result = 'underline: <u>stuff</u>'
 			test(text, result, done)
 
@@ -65,13 +65,18 @@ describe 'ansi to html', () ->
 			result = 'bold: <b>stuff</b>'
 			test(text, result, done)
 
+		it 'renders italic', (done) ->
+			text = 'italic: \x1b[3mstuff'
+			result = 'italic: <i>stuff</i>'
+			test(text, result, done)
+
 		it 'handles ressets', (done) ->
 			text = '\x1b[1mthis is bold\x1b[0m, but this isn\'t'
 			result = '<b>this is bold</b>, but this isn\'t'
 			test(text, result, done)
 
 		it 'handles multiple resets', (done) ->
-			text = 'normal, \x1b[1mbold, \x1b[3munderline, \x1b[31mred\x1b[0m, normal'
+			text = 'normal, \x1b[1mbold, \x1b[4munderline, \x1b[31mred\x1b[0m, normal'
 			result = 'normal, <b>bold, <u>underline, <span style="color:' +
 				'#A00">red</span></u></b>, normal'
 			test(text, result, done)
@@ -82,13 +87,13 @@ describe 'ansi to html', () ->
 			test(text, result, done)
 
 		it 'renders multi-attribute sequences', (done) ->
-			text = 'normal, \x1b[1;3;31mbold, underline, and red\x1b[0m, normal'
+			text = 'normal, \x1b[1;4;31mbold, underline, and red\x1b[0m, normal'
 			result = 'normal, <b><u><span style="color:#A00">bold, underline,' +
 				' and red</span></u></b>, normal'
 			test(text, result, done)
 
 		it 'renders multi-attribute sequences with a semi-colon', (done) ->
-			text = 'normal, \x1b[1;3;31;mbold, underline, and red\x1b[0m, normal'
+			text = 'normal, \x1b[1;4;31;mbold, underline, and red\x1b[0m, normal'
 			result = 'normal, <b><u><span style="color:#A00">bold, underline, ' +
 				'and red</span></u></b>, normal'
 			test(text, result, done)
@@ -120,6 +125,11 @@ describe 'ansi to html', () ->
 			result = 'underline: <u>stuff</u>things'
 			test(text, result, done)
 
+		it 'is able to skip disabling underline', (done) ->
+			text = 'not underline: stuff\x1b[24mthings'
+			result = 'not underline: stuffthings'
+			test(text, result, done)
+
 		it 'renders two escape sequences in sequence', (done) ->
 			text = 'months remaining\x1b[1;31mtimes\x1b[m\x1b[1;32mmultiplied' +
 				' by\x1b[m $10'
@@ -147,10 +157,30 @@ describe 'ansi to html', () ->
 			result = 'hello'
 			test(text, result, done)
 
+		it 'renders un-bold code appropriately', (done) ->
+			text = '\x1b[1mHello\x1b[22m World'
+			result = '<b>Hello</b> World'
+			test(text, result, done)
+
+		it 'skips rendering un-bold code appropriately', (done) ->
+			text = 'Hello\x1b[22m World'
+			result = 'Hello World'
+			test(text, result, done)
+
+		it 'renders un-italic code appropriately', (done) ->
+			text = '\x1b[3mHello\x1b[23m World'
+			result = '<i>Hello</i> World'
+			test(text, result, done)
+
+		it 'skips rendering un-italic code appropriately', (done) ->
+			text = 'Hello\x1b[23m World'
+			result = 'Hello World'
+			test(text, result, done)
+
 	describe 'with escapeXML option enabled', () ->
 
 		it 'escapes XML entities', (done) ->
-			text = 'normal, \x1b[1;3;31;mbold, <underline>, and red\x1b[0m, normal'
+			text = 'normal, \x1b[1;4;31;mbold, <underline>, and red\x1b[0m, normal'
 			result = 'normal, <b><u><span style="color:#A00">bold, &lt;underline' +
 				'&gt;, and red</span></u></b>, normal'
 			test(text, result, done, escapeXML: true)
@@ -160,6 +190,11 @@ describe 'ansi to html', () ->
 		it 'renders line breaks', (done) ->
 			text = 'test\ntest\n'
 			result = 'test<br/>test<br/>'
+			test(text, result, done, newline: true)
+
+		it 'renders multiple line breaks', (done) ->
+			text = 'test\n\ntest\n'
+			result = 'test<br/><br/>test<br/>'
 			test(text, result, done, newline: true)
 
 	describe 'with stream option enabled', () ->
