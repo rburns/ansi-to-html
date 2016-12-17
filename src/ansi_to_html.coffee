@@ -205,7 +205,7 @@ class Filter
 			{pattern: /^\x1b\[38;5;(\d+)m/, sub: removeXterm256}
 
 			# newlines
-			{pattern: /^\n+/, sub: newline}
+			{pattern: /^\n/, sub: newline}
 
 			# ansi escape sequences that mess with the display
 			{pattern: /^\x1b\[((?:\d{1,3};?)+|)m/, sub: ansiMess}
