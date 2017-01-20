@@ -362,24 +362,16 @@ const Filter = (function () {
         }
       });
 
-      this.forEach(input, options, function (chunk) {
-        return buf.push(chunk);
-      });
+      let str = '';
 
-      return buf.join('');
-    },
+      input.forEach(bufItemPart => {
+        str += bufItemPart;
 
-    forEach (input, options, callback) {
-      let buf = '';
-
-      input.forEach(chunk => {
-        buf += chunk;
-
-        return tokenize(buf, options, (token, data) => {
+        return tokenize(str, options, (token, data) => {
           let output = this.generateOutput(token, data);
 
           if (output) {
-            callback(output);
+            buf.push(output);
           }
 
           if (options.stream) {
@@ -389,8 +381,10 @@ const Filter = (function () {
       });
 
       if (this.stack.length) {
-        return callback(this.resetStyles());
+        buf.push(this.resetStyles());
       }
+
+      return buf.join('');
     },
 
     /**
