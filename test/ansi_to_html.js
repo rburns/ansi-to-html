@@ -227,6 +227,7 @@ describe('ansi to html', function () {
     it('renders un-italic code appropriately', function (done) {
       const text = '\x1b[3mHello\x1b[23m World',
         result = '<i>Hello</i> World';
+
       return test(text, result, done);
     });
 
