@@ -354,9 +354,11 @@ const Filter = (function () {
       this.input = typeof input === 'string' ? [input] : input;
       let buf = [];
       this.stickyStack.forEach((element) => {
-        return this.generateOutput(element.token, element.data, function (chunk) {
-          return buf.push(chunk);
-        });
+        let output = this.generateOutput(element.token, element.data);
+
+        if (output) {
+          buf.push(output);
+        }
       });
       this.forEach(function (chunk) {
         return buf.push(chunk);
@@ -376,7 +378,11 @@ const Filter = (function () {
         buf += chunk;
 
         return tokenize(buf, options, (token, data) => {
-          this.generateOutput(token, data, callback);
+          let output = this.generateOutput(token, data);
+
+          if (output) {
+            callback(output);
+          }
 
           if (shouldStream) {
             this.stickyStack = updateStickyStack(this.stickyStack, token, data);
@@ -389,32 +395,29 @@ const Filter = (function () {
       }
     },
 
-    generateOutput (token, data, callback) {
+    /**
+     * @param token
+     * @param data
+     */
+    generateOutput (token, data) {
       const options = this.opts,
         stack = this.stack;
       let result;
 
-      switch (token) {
-        case 'text':
-          result = pushText(data, options);
-          break;
-        case 'display':
-          result = this.handleDisplay(data);
-          break;
-        case 'xterm256':
-          result = pushStyle(stack, 'ef' + data);
-          break;
+      if (token === 'text') {
+        result = pushText(data, options);
+      } else if (token === 'display') {
+        result = this.handleDisplay(data);
+      } else if (token === 'xterm256') {
+        result = pushStyle(stack, 'ef' + data);
       }
 
-      if (result) {
-        callback(result);
-      }
+      return result;
     },
 
     /**
      *
      * @param {number} code
-     * @param {function} callback
      * @returns {*}
      */
     handleDisplay (code) {
