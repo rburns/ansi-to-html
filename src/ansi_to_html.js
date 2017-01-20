@@ -344,34 +344,32 @@ const Filter = (function () {
     options = options || {};
 
     this.opts = Object.assign({}, defaults, options);
-    this.input = [];
     this.stack = [];
     this.stickyStack = [];
   }
 
   Filter.prototype = {
     toHtml (input) {
-      this.input = typeof input === 'string' ? [input] : input;
-      let buf = [];
-      this.stickyStack.forEach((element) => {
+      input = typeof input === 'string' ? [input] : input;
+      const options = this.opts,
+        buf = [];
+
+      this.stickyStack.forEach(element => {
         let output = this.generateOutput(element.token, element.data);
 
         if (output) {
           buf.push(output);
         }
       });
-      this.forEach(function (chunk) {
+
+      this.forEach(input, options, function (chunk) {
         return buf.push(chunk);
       });
 
-      this.input = [];
       return buf.join('');
     },
 
-    forEach (callback) {
-      const options = this.opts,
-        shouldStream = this.opts.stream,
-        input = this.input;
+    forEach (input, options, callback) {
       let buf = '';
 
       input.forEach(chunk => {
@@ -384,7 +382,7 @@ const Filter = (function () {
             callback(output);
           }
 
-          if (shouldStream) {
+          if (options.stream) {
             this.stickyStack = updateStickyStack(this.stickyStack, token, data);
           }
         });
