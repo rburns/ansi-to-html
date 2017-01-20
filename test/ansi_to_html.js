@@ -247,6 +247,7 @@ describe('ansi to html', function () {
       return test(text, result, done, {escapeXML: true});
     });
   });
+
   describe('with newline option enabled', function () {
     it('renders line breaks', function (done) {
       const text = 'test\ntest\n',
@@ -297,6 +298,22 @@ describe('ansi to html', function () {
         result = '<b>this <strike>is bold</strike></b>, but this isn\'t nor is this';
 
       return test(text, result, done, {stream: true});
+    });
+  });
+
+  describe('with custom colors enabled', function () {
+    it('renders basic colors', function (done) {
+      const text = ['\x1b[31mblue', 'not blue'],
+        result = '<span style="color:#00A">blue</span>not blue';
+
+      return test(text, result, done, {colors: {1: '#00A'}});
+    });
+
+    it('renders basic colors with streaming', function (done) {
+      const text = ['\x1b[31mblue', 'also blue'],
+        result = '<span style="color:#00A">blue</span><span style="color:#00A">also blue</span>';
+
+      return test(text, result, done, {stream: true, colors: {1: '#00A'}});
     });
   });
 });

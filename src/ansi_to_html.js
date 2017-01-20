@@ -1,5 +1,15 @@
 const entities = require('entities'),
-  COLORS = {
+  defaults = {
+    fg: '#FFF',
+    bg: '#000',
+    newline: false,
+    escapeXML: false,
+    stream: false,
+    colors: getDefaultColors()
+  };
+
+function getDefaultColors() {
+  const colors = {
     0: '#000',
     1: '#A00',
     2: '#0A0',
@@ -16,14 +26,38 @@ const entities = require('entities'),
     13: '#F5F',
     14: '#5FF',
     15: '#FFF'
-  },
-  defaults = {
-    fg: '#FFF',
-    bg: '#000',
-    newline: false,
-    escapeXML: false,
-    stream: false
   };
+
+  range(0, 5).forEach(red => {
+    range(0, 5).forEach(green => {
+      range(0, 5).forEach(blue => setStyleColor(red, green, blue, colors));
+    });
+  });
+
+  range(0, 23).forEach(function (gray) {
+    const c = gray + 232,
+      l = toHexString(gray * 10 + 8);
+
+    colors[c] = '#' + l + l + l;
+  });
+
+  return colors;
+}
+
+/**
+ * @param {number} red
+ * @param {number} green
+ * @param {number} blue
+ * @param {object} colors
+ */
+function setStyleColor(red, green, blue, colors) {
+  const c = 16 + (red * 36) + (green * 6) + blue,
+    r = red > 0 ? red * 40 + 55 : 0,
+    g = green > 0 ? green * 40 + 55 : 0,
+    b = blue > 0 ? blue * 40 + 55 : 0;
+
+  colors[c] = toColorHexString([r, g, b]);
+}
 
 /**
  * Converts from a number like 15 to a hex string like 'F'
@@ -69,7 +103,7 @@ function generateOutput(stack, token, data, options) {
   } else if (token === 'display') {
     result = handleDisplay(stack, data, options);
   } else if (token === 'xterm256') {
-    result = pushForegroundColor(stack, getColorByCode(data));
+    result = pushForegroundColor(stack, options.colors[data]);
   }
 
   return result;
@@ -104,13 +138,13 @@ function handleDisplay(stack, code, options) {
   } else if (4 < code && code < 7) {
     result = pushTag(stack, 'blink');
   } else if (29 < code && code < 38) {
-    result = pushForegroundColor(stack, getColorByCode(code - 30));
+    result = pushForegroundColor(stack, options.colors[code - 30]);
   } else if ((39 < code && code < 48)) {
-    result = pushBackgroundColor(stack, getColorByCode(code - 40));
+    result = pushBackgroundColor(stack, options.colors[code - 40]);
   } else if ((89 < code && code < 98)) {
-    result = pushForegroundColor(stack, getColorByCode(8 + (code - 90)));
+    result = pushForegroundColor(stack, options.colors[8 + (code - 90)]);
   } else if ((99 < code && code < 108)) {
-    result = pushBackgroundColor(stack, getColorByCode(8 + (code - 100)));
+    result = pushBackgroundColor(stack, options.colors[8 + (code - 100)]);
   }
 
   return result;
@@ -147,33 +181,7 @@ function range(low, high) {
   return results;
 }
 
-/**
- * @param {number} red
- * @param {number} green
- * @param {number} blue
- */
-function setStyleColor(red, green, blue) {
-  const c = 16 + (red * 36) + (green * 6) + blue,
-    r = red > 0 ? red * 40 + 55 : 0,
-    g = green > 0 ? green * 40 + 55 : 0,
-    b = blue > 0 ? blue * 40 + 55 : 0;
 
-  COLORS[c] = toColorHexString([r, g, b]);
-}
-
-// fill in standard colors
-range(0, 5).forEach(red => {
-  range(0, 5).forEach(green => {
-    range(0, 5).forEach(blue => setStyleColor(red, green, blue));
-  });
-});
-
-range(0, 23).forEach(function (gray) {
-  const c = gray + 232,
-    l = toHexString(gray * 10 + 8);
-
-  COLORS[c] = '#' + l + l + l;
-});
 
 /**
  * Returns a new function that is true if value is NOT the same category
@@ -240,10 +248,6 @@ function pushTag(stack, tag, style) {
     style = '';
   }
 
-  if (style.length && style.indexOf(':') === -1) {
-    style = COLORS[style];
-  }
-
   stack.push(tag);
 
   return ['<' + tag, (style ? ' style="' + style + '"' : void 0), '>'].join('');
@@ -264,10 +268,6 @@ function pushForegroundColor(stack, color) {
 
 function pushBackgroundColor(stack, color) {
   return pushTag(stack, 'span', 'background-color:' + color);
-}
-
-function getColorByCode(code) {
-  return COLORS[code];
 }
 
 /**
@@ -415,6 +415,10 @@ function updateStickyStack(stickyStack, token, data) {
 const Filter = (function () {
   function Filter(options) {
     options = options || {};
+
+    if (options.colors) {
+      options.colors = Object.assign({}, defaults.colors, options.colors);
+    }
 
     this.opts = Object.assign({}, defaults, options);
     this.stack = [];
