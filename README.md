@@ -57,6 +57,8 @@ Options can be be passed to the constructor to customize behaviour.
 
 **stream** <code>true or false</code> save style state across invocations of toHtml().
 
+**colors** <code>Object/Array with values 0 - 255 containing CSS color values</code> Can override specific colors or the entire ANSI palette
+
 ### Default options
 
 ```coffee

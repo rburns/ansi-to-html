@@ -1,12 +1,12 @@
 /* eslint no-console:0 */
 const help = '\nuasge: ansi-to-html [options] [file]\n    \nfile:  The file to display or stdin\n    \noptions:    \n    \n    -f, --fg         The background color used for resets (#000)\n    -b, --bg         The foreground color used for resets (#FFF)\n    -n, --newline    Convert newline characters to <br/>  (false)\n    -x, --escapeXML  Generate XML entities                (false)\n    -v, --version    Print version\n    -h, --help       Print help\n    ';
-let file = null,
+var file = null,
   skip = false,
   args = {
     stream: true
   };
 
-for (let i = 2, j = 2, ref = process.argv.length; 2 <= ref ? j < ref : j > ref; i = 2 <= ref ? ++j : --j) {
+for (var i = 2, j = 2, ref = process.argv.length; 2 <= ref ? j < ref : j > ref; i = 2 <= ref ? ++j : --j) {
   if (skip) {
     skip = false;
     continue;
@@ -33,7 +33,7 @@ for (let i = 2, j = 2, ref = process.argv.length; 2 <= ref ? j < ref : j > ref; 
       break;
     case '-v':
     case '--version':
-      console.log(require(__dirname + "/../package.json").version);
+      console.log(require(__dirname + '/../package.json').version);
       process.exit(0);
       break;
     case '-h':
@@ -46,16 +46,16 @@ for (let i = 2, j = 2, ref = process.argv.length; 2 <= ref ? j < ref : j > ref; 
   }
 }
 
-let convert = new (require('../'))(args);
+var convert = new (require('../'))(args);
 
-let htmlStream = function (stream) {
+var htmlStream = function (stream) {
   return stream.on('data', function (chunk) {
     return process.stdout.write(convert.toHtml(chunk));
   });
 };
 
 if (file) {
-  let stream = require('fs').createReadStream(file, {encoding: 'utf8'});
+  var stream = require('fs').createReadStream(file, {encoding: 'utf8'});
   htmlStream(stream);
 } else {
   process.stdin.setEncoding('utf8');

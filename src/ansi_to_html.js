@@ -65,7 +65,7 @@ function setStyleColor(red, green, blue, colors) {
  * @returns {string}
  */
 function toHexString(num) {
-  let str = num.toString(16);
+  var str = num.toString(16);
 
   while (str.length < 2) {
     str = '0' + str;
@@ -80,9 +80,9 @@ function toHexString(num) {
  * @returns {string}
  */
 function toColorHexString(ref) {
-  let results = [];
+  var results = [];
 
-  for (let j = 0, len = ref.length; j < len; j++) {
+  for (var j = 0, len = ref.length; j < len; j++) {
     results.push(toHexString(ref[j]));
   }
 
@@ -96,7 +96,7 @@ function toColorHexString(ref) {
  * @param {object} options
  */
 function generateOutput(stack, token, data, options) {
-  let result;
+  var result;
 
   if (token === 'text') {
     result = pushText(data, options);
@@ -117,7 +117,8 @@ function generateOutput(stack, token, data, options) {
  */
 function handleDisplay(stack, code, options) {
   code = parseInt(code, 10);
-  let result;
+  var result;
+
   const codeMap = {
     '-1': () => '<br/>',
     0: () => stack.length && resetStyles(stack),
@@ -155,7 +156,7 @@ function handleDisplay(stack, code, options) {
  * @returns {string}
  */
 function resetStyles(stack) {
-  let stackClone = stack.slice(0);
+  var stackClone = stack.slice(0);
 
   stack.length = 0;
 
@@ -174,7 +175,7 @@ function resetStyles(stack) {
 function range(low, high) {
   const results = [];
 
-  for (let j = low; j <= high; j++) {
+  for (var j = low; j <= high; j++) {
     results.push(j);
   }
 
@@ -201,7 +202,7 @@ function notCategory(category) {
  */
 function categoryForCode(code) {
   code = parseInt(code, 10);
-  let result = null;
+  var result = null;
 
   if (code === 0) {
     result = 'all';
@@ -276,7 +277,7 @@ function pushBackgroundColor(stack, color) {
  * @returns {string}
  */
 function closeTag(stack, style) {
-  let last;
+  var last;
 
   if (stack.slice(-1)[0] === style) {
     last = stack.pop();
@@ -294,7 +295,7 @@ function closeTag(stack, style) {
  * @returns {Array}
  */
 function tokenize(text, options, callback) {
-  let ansiMatch = false,
+  var ansiMatch = false,
     ansiHandler = 3;
 
   function remove() {
@@ -324,7 +325,7 @@ function tokenize(text, options, callback) {
 
     g1 = g1.trimRight(';').split(';');
 
-    for (let o = 0, len = g1.length; o < len; o++) {
+    for (var o = 0, len = g1.length; o < len; o++) {
       callback('display', g1[o]);
     }
 
@@ -373,12 +374,12 @@ function tokenize(text, options, callback) {
     text = text.replace(handler.pattern, handler.sub);
   }
 
-  let handler,
+  var handler,
     results1 = [],
     length = text.length;
 
   while (length > 0) {
-    for (let i = 0, o = 0, len = tokens.length; o < len; i = ++o) {
+    for (var i = 0, o = 0, len = tokens.length; o < len; i = ++o) {
       handler = tokens[i];
       process(handler, i);
     }
@@ -412,55 +413,51 @@ function updateStickyStack(stickyStack, token, data) {
   return stickyStack;
 }
 
-const Filter = (function () {
-  function Filter(options) {
-    options = options || {};
+function Filter(options) {
+  options = options || {};
 
-    if (options.colors) {
-      options.colors = Object.assign({}, defaults.colors, options.colors);
-    }
-
-    this.opts = Object.assign({}, defaults, options);
-    this.stack = [];
-    this.stickyStack = [];
+  if (options.colors) {
+    options.colors = Object.assign({}, defaults.colors, options.colors);
   }
 
-  Filter.prototype = {
-    toHtml (input) {
-      input = typeof input === 'string' ? [input] : input;
-      const stack = this.stack,
-        options = this.opts,
-        buf = [];
+  this.opts = Object.assign({}, defaults, options);
+  this.stack = [];
+  this.stickyStack = [];
+}
 
-      this.stickyStack.forEach(element => {
-        let output = generateOutput(stack, element.token, element.data, options);
+Filter.prototype = {
+  toHtml (input) {
+    input = typeof input === 'string' ? [input] : input;
+    const stack = this.stack,
+      options = this.opts,
+      buf = [];
 
-        if (output) {
-          buf.push(output);
-        }
-      });
+    this.stickyStack.forEach(element => {
+      var output = generateOutput(stack, element.token, element.data, options);
 
-      tokenize(input.join(''), options, (token, data) => {
-        let output = generateOutput(stack, token, data, options);
+      if (output) {
+        buf.push(output);
+      }
+    });
 
-        if (output) {
-          buf.push(output);
-        }
+    tokenize(input.join(''), options, (token, data) => {
+      var output = generateOutput(stack, token, data, options);
 
-        if (options.stream) {
-          this.stickyStack = updateStickyStack(this.stickyStack, token, data);
-        }
-      });
-
-      if (stack.length) {
-        buf.push(resetStyles(stack));
+      if (output) {
+        buf.push(output);
       }
 
-      return buf.join('');
-    }
-  };
+      if (options.stream) {
+        this.stickyStack = updateStickyStack(this.stickyStack, token, data);
+      }
+    });
 
-  return Filter;
-})();
+    if (stack.length) {
+      buf.push(resetStyles(stack));
+    }
+
+    return buf.join('');
+  }
+};
 
 module.exports = Filter;

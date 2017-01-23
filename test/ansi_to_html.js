@@ -8,10 +8,10 @@ function test(text, result, done, opts) {
     opts = {};
   }
 
-  let f = new Filter(opts);
+  var f = new Filter(opts);
 
   function filtered(memo, t) {
-    return memo += f.toHtml(t);
+    return memo + f.toHtml(t);
   }
 
   text = typeof text.reduce === 'function' ? text : [text];
@@ -314,6 +314,38 @@ describe('ansi to html', function () {
         result = '<span style="color:#00A">blue</span><span style="color:#00A">also blue</span>';
 
       return test(text, result, done, {stream: true, colors: {1: '#00A'}});
+    });
+
+    it('renders custom colors and default colors', function (done) {
+      const text = ['\x1b[31mblue', 'not blue', '\x1b[94mlight blue', 'not colored'],
+        result = '<span style="color:#00A">blue</span>not blue<span style="color:#55F">light blue</span>not colored';
+
+      return test(text, result, done, {colors: {1: '#00A'}});
+    });
+
+    it('renders custom colors and default colors together', function (done) {
+      const text = ['\x1b[31mblue', 'not blue', '\x1b[94mlight blue', 'not colored'],
+        result = '<span style="color:#00A">blue</span>not blue<span style="color:#55F">light blue</span>not colored';
+
+      return test(text, result, done, {colors: {1: '#00A'}});
+    });
+
+    it('renders custom 8/ 16 colors', function (done) {
+      // code - 90 + 8 = color
+      // so 94 - 90 + 8 = 12
+      const text = ['\x1b[94mlighter blue'],
+        result = '<span style="color:#33F">lighter blue</span>';
+
+      return test(text, result, done, {colors: {12: '#33F'}});
+    });
+
+    it('renders custom 256 colors', function (done) {
+      // code - 90 + 8 = color
+      // so 94 - 90 + 8 = 12
+      const text = ['\x1b[38;5;125mdark red', 'then \x1b[38;5;126msome other color'],
+        result = '<span style="color:#af005f">dark red</span>then <span style="color:#af225f">some other color</span>';
+
+      return test(text, result, done, {colors: {126: '#af225f'}});
     });
   });
 });
