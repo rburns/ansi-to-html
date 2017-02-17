@@ -4,5 +4,4 @@ node_js:
   - "6"
   - "5"
   - "4"
-before_install: "npm install grunt-cli -g"
-script: "grunt"
+script: "npm run lint && npm test"
