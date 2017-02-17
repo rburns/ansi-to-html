@@ -2,7 +2,7 @@
   "name": "ansi-to-html",
   "version": "0.6.0",
   "description": "Convert ansi escaped text streams to html.",
-  "main": "src/ansi_to_html.js",
+  "main": "lib/ansi_to_html.js",
   "engines": {
     "node": "*"
   },
@@ -27,6 +27,10 @@
     "url": "http://rburns.paiges.net/"
   },
   "contributors": [
+    {
+      "name": "Dane Stuckel",
+      "email": "dane.stuckel@gmail.com"
+    },
     {
       "name": "Michael",
       "email": "michael@riesd.com"
