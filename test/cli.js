@@ -5,9 +5,9 @@ const childProcess = require('child_process'),
 
 function getColorCmd(cmd) {
   const cmds = {
-    darwin: `CLICOLOR_FORCE="1" ${cmd} | node src/cli`,
-    linux: `CLICOLOR="1" ${cmd} | node src/cli`,
-    win32: `${cmd} | node src/cli`
+    darwin: `CLICOLOR_FORCE="1" ${cmd} | node lib/cli`,
+    linux: `CLICOLOR="1" ${cmd} | node lib/cli`,
+    win32: `${cmd} | node lib/cli`
   };
 
   return cmds[process.platform];

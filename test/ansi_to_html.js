@@ -1,6 +1,6 @@
 /* globals describe, it*/
 
-const Filter = require('../src/ansi_to_html.js'),
+const Filter = require('../lib/ansi_to_html.js'),
   expect = require('chai').expect;
 
 function test(text, result, done, opts) {
