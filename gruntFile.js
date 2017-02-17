@@ -9,7 +9,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     eslint: {
         options: { configFile: '.eslintrc.json' },
-        target: 'src/**/*.js'
+        target: ['lib/**/*.js', 'test/**/*.js']
     },
     simplemocha: {
       all: ['test/ansi_to_html.js', ['test/cli.js']],

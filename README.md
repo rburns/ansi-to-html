@@ -61,12 +61,14 @@ Options can be be passed to the constructor to customize behaviour.
 
 ### Default options
 
-```coffee
-fg: '#FFF'
-bg: '#000'
-newline: false
-escapeXML: false
-stream: false
+```javascript
+{
+    fg: '#FFF',
+    bg: '#000',
+    newline: false,
+    escapeXML: false,
+    stream: false
+}
 ```
 
 ## Development
@@ -79,19 +81,10 @@ Once you have the git repository cloned, install the dependencies:
 	cd ansi-to-html
 	npm install
 
-If you don't have it already, install the grunt command-line tool:
+Lint
 
-	npm install -g grunt-cli
+    npm run lint
 
-Build and test
+Test
 
-	grunt
-
-All the time
-
-	grunt watch
-
-Or separately
-
-	grunt coffee
-	grunt simplemocha  # or npm test
+	npm test

@@ -7,7 +7,8 @@
     "node": "*"
   },
   "scripts": {
-    "test": "grunt simplemocha"
+    "lint": "./node_modules/eslint/bin/eslint.js lib test",
+    "test": "./node_modules/mocha/bin/mocha --reporter tap"
   },
   "repository": {
     "type": "git",
@@ -43,10 +44,7 @@
   "devDependencies": {
     "chai": "~3.5.0",
     "eslint": "^3.13.1",
-    "grunt": "~0.4.5",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-eslint": "^19.0.0",
-    "grunt-simple-mocha": "~0.4.1"
+    "mocha": "^3.2.0"
   },
   "dependencies": {
     "entities": "^1.1.1"
