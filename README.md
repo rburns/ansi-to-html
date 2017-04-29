@@ -85,6 +85,10 @@ Lint
 
     npm run lint
 
+Build
+
+    npm run build
+
 Test
 
     npm test
