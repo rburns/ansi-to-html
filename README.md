@@ -78,8 +78,8 @@ Options can be be passed to the constructor to customize behaviour.
 
 Once you have the git repository cloned, install the dependencies:
 
-	cd ansi-to-html
-	npm install
+    cd ansi-to-html
+    npm install
 
 Lint
 
@@ -87,4 +87,4 @@ Lint
 
 Test
 
-	npm test
+    npm test

@@ -7,8 +7,9 @@
     "node": "*"
   },
   "scripts": {
-    "lint": "./node_modules/eslint/bin/eslint.js lib test",
-    "test": "./node_modules/mocha/bin/mocha --reporter tap"
+    "build": "./node_modules/.bin/babel src --out-dir lib",
+    "lint": "./node_modules/.bin/eslint src test",
+    "test": "./node_modules/.bin/mocha --reporter tap"
   },
   "repository": {
     "type": "git",
@@ -46,6 +47,8 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
     "chai": "~3.5.0",
     "eslint": "^3.13.1",
     "mocha": "^3.2.0"
@@ -55,5 +58,8 @@
   },
   "bin": {
     "ansi-to-html": "./bin/ansi-to-html"
+  },
+  "babel": {
+    "presets": ["env"]
   }
 }
