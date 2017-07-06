@@ -376,10 +376,18 @@ function tokenize(text, options, callback) {
     var results1 = [];
     var length = text.length;
 
+    outer:
     while (length > 0) {
         for (var i = 0, o = 0, len = tokens.length; o < len; i = ++o) {
             handler = tokens[i];
             process(handler, i);
+
+            if (text.length !== length) {
+                // We matched a token and removed it from the text. We need to
+                // start matching *all* tokens against the new text.
+                length = text.length;
+                continue outer;
+            }
         }
 
         if (text.length === length) {
