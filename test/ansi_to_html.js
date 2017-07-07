@@ -197,6 +197,13 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
+        it('drops EL code with 0 parameter after new line character', function (done) {
+            const text = 'HELLO\n\x1b[0K\u001b[33;1mWORLD\u001b[0m\n';
+            const result = 'HELLO\n<span style="color:#A50"><b>WORLD</b></span>\n';
+
+            return test(text, result, done);
+        });
+
         it('drops EL code with 1 parameter', function (done) {
             const text = '\x1b[1Khello';
             const result = 'hello';
