@@ -1,6 +1,8 @@
 ## Ansi to Html
 
-![](https://img.shields.io/npm/v/ansi-to-html.svg) ![](https://img.shields.io/npm/dm/ansi-to-html.svg) ![](https://img.shields.io/travis/rburns/ansi-to-html.svg)
+[![](https://img.shields.io/travis/rburns/ansi-to-html.svg)](https://travis-ci.org/rburns/ansi-to-html/branches)
+[![](https://img.shields.io/npm/v/ansi-to-html.svg)](https://www.npmjs.com/package/ansi-to-html)
+![](https://img.shields.io/npm/dm/ansi-to-html.svg)
 
 This is a port of the ansi to html converter from [bcat](https://github.com/rtomayko/bcat/blob/master/lib/bcat/ansi.rb) to Javascript.
 
