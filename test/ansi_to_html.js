@@ -218,6 +218,13 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
+        it('drops setusg0 sequence', function (done) {
+            const text = '\x1b[(Bhello';
+            const result = 'hello';
+
+            return test(text, result, done);
+        });
+
         it('renders un-bold code appropriately', function (done) {
             const text = '\x1b[1mHello\x1b[22m World';
             const result = '<b>Hello</b> World';

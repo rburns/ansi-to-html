@@ -346,6 +346,9 @@ function tokenize(text, options, callback) {
         pattern: /^\x1b\[[012]?K/,
         sub: remove
     }, {
+        pattern: /^\x1b\[\(B/,
+        sub: remove
+    }, {
         pattern: /^\x1b\[38;5;(\d+)m/,
         sub: removeXterm256
     }, {
