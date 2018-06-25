@@ -358,6 +358,22 @@ function tokenize(text, options, callback) {
         pattern: /^\x1b\[((?:\d{1,3};?)+|)m/,
         sub: ansiMess
     }, {
+        // CSI n J
+        // ED - Erase in Display Clears part of the screen.
+        // If n is 0 (or missing), clear from cursor to end of screen.
+        // If n is 1, clear from cursor to beginning of the screen.
+        // If n is 2, clear entire screen (and moves cursor to upper left on DOS ANSI.SYS).
+        // If n is 3, clear entire screen and delete all lines saved in the scrollback buffer
+        //   (this feature was added for xterm and is supported by other terminal applications).
+        pattern: /^\x1b\[\d?J/,
+        sub: remove
+    }, {
+        // CSI n ; m f
+        // HVP - Horizontal Vertical Position Same as CUP
+        pattern: /^\x1b\[\d{0,3};\d{0,3}f/,
+        sub: remove
+    }, {
+        // catch-all for CSI sequences?
         pattern: /^\x1b\[?[\d;]{0,3}/,
         sub: remove
     }, {
