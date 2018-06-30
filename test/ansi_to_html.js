@@ -218,6 +218,41 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
+        it('drops ED code with 0 parameter', function (done) {
+            const text = '\x1b[Jhello';
+            const result = 'hello';
+
+            return test(text, result, done);
+        });
+
+        it('drops ED code with 1 parameter', function (done) {
+            const text = '\x1b[1Jhello';
+            const result = 'hello';
+
+            return test(text, result, done);
+        });
+
+        it('drops HVP code with 0 parameter', function (done) {
+            const text = '\x1b[;fhello';
+            const result = 'hello';
+
+            return test(text, result, done);
+        });
+
+        it('drops HVP code with 1 parameter', function (done) {
+            const text = '\x1b[123;fhello';
+            const result = 'hello';
+
+            return test(text, result, done);
+        });
+
+        it('drops HVP code with 2 parameter', function (done) {
+            const text = '\x1b[123;456fhello';
+            const result = 'hello';
+
+            return test(text, result, done);
+        });
+
         it('drops setusg0 sequence', function (done) {
             const text = '\x1b[(Bhello';
             const result = 'hello';
