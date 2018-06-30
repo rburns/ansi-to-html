@@ -1,6 +1,6 @@
 {
   "name": "ansi-to-html",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "Convert ansi escaped text streams to html.",
   "main": "lib/ansi_to_html.js",
   "engines": {
@@ -47,6 +47,10 @@
     {
       "name": "Patrick Steele-Idem",
       "email": "pnidem@gmail.com"
+    },
+    {
+      "name": "Paul Grime",
+      "email": "gitgrimbo@gmail.com"
     }
   ],
   "license": "MIT",
