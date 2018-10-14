@@ -131,7 +131,8 @@ function handleDisplay(stack, code, options) {
         23: () => closeTag(stack, 'i'),
         24: () => closeTag(stack, 'u'),
         39: () => pushForegroundColor(stack, options.fg),
-        49: () => pushBackgroundColor(stack, options.bg)
+        49: () => pushBackgroundColor(stack, options.bg),
+        53: () => pushStyle(stack, 'text-decoration:overline')
     };
 
     if (codeMap[code]) {
