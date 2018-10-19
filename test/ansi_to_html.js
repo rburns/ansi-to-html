@@ -287,6 +287,13 @@ describe('ansi to html', function () {
 
             return test(text, result, done);
         });
+        
+        it('renders overline', function (done) {
+            const text = '\x1b[53mHello World';
+            const result = '<span style="text-decoration:overline">Hello World</span>';
+
+            return test(text, result, done);
+        });
     });
 
     describe('with escapeXML option enabled', function () {
