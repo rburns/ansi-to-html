@@ -99,6 +99,13 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
+        it('renders faint text', function(done) {
+            const text = 'faint: \x1b[2mstuff';
+            const result = 'faint: <span style="filter:brightness(0.7)">stuff</span>';
+
+            return test(text, result, done);
+        });
+
         it('handles resets', function (done) {
             const text = '\x1b[1mthis is bold\x1b[0m, but this isn\'t';
             const result = '<b>this is bold</b>, but this isn\'t';
@@ -287,7 +294,7 @@ describe('ansi to html', function () {
 
             return test(text, result, done);
         });
-        
+
         it('renders overline', function (done) {
             const text = '\x1b[53mHello World';
             const result = '<span style="text-decoration:overline">Hello World</span>';

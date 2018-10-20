@@ -123,6 +123,7 @@ function handleDisplay(stack, code, options) {
         '-1': () => '<br/>',
         0: () => stack.length && resetStyles(stack),
         1: () => pushTag(stack, 'b'),
+        2: () => pushStyle(stack, 'filter:brightness(0.7)'),
         3: () => pushTag(stack, 'i'),
         4: () => pushTag(stack, 'u'),
         8: () => pushStyle(stack, 'display:none'),
