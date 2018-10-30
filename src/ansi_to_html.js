@@ -104,9 +104,28 @@ function generateOutput(stack, token, data, options) {
         result = handleDisplay(stack, data, options);
     } else if (token === 'xterm256') {
         result = pushForegroundColor(stack, options.colors[data]);
+    } else if (token === 'rgb') {
+        result = handleRgb(stack, data);
     }
 
     return result;
+}
+
+/**
+ * @param {Array} stack
+ * @param {string} data
+ * @returns {*}
+ */
+function handleRgb(stack, data) {
+    data = data.substring(2).slice(0, -1);
+    const operation = +data.substr(0,2);
+
+    const color = data.substring(5).split(';');
+    const rgb = color.map(function(value) {
+        return ('0' + Number(value).toString(16)).substr(-2);
+    }).join('');
+
+    return pushStyle(stack, (operation === 38 ? 'color:#' : 'background-color:#') + rgb);
 }
 
 /**
@@ -339,6 +358,12 @@ function tokenize(text, options, callback) {
         return '';
     }
 
+    function rgb(m) {
+        callback('rgb', m);
+
+        return '';
+    }
+
     /* eslint no-control-regex:0 */
     const tokens = [{
         pattern: /^\x08+/,
@@ -349,6 +374,9 @@ function tokenize(text, options, callback) {
     }, {
         pattern: /^\x1b\[\(B/,
         sub: remove
+    }, {
+        pattern: /^\x1b\[[34]8;2;\d+;\d+;\d+m/,
+        sub: rgb
     }, {
         pattern: /^\x1b\[38;5;(\d+)m/,
         sub: removeXterm256
