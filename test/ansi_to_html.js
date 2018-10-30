@@ -148,6 +148,20 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
+        it('renders foreground rgb sequences', function (done) {
+            const text = '\x1b[38;2;210;60;114mhello';
+            const result = '<span style="color:#d23c72">hello</span>';
+
+            return test(text, result, done);
+        });
+
+        it('renders background rgb sequences', function (done) {
+            const text = '\x1b[48;2;155;42;45mhello';
+            const result = '<span style="background-color:#9b2a2d">hello</span>';
+
+            return test(text, result, done);
+        });
+
         it('handles resetting to default foreground color', function (done) {
             const text = '\x1b[30mblack\x1b[39mdefault';
             const result = '<span style="color:#000">black<span style="color:#FFF">default</span></span>';
