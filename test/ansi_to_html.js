@@ -301,10 +301,17 @@ describe('ansi to html', function () {
 
             return test(text, result, done);
         });
-        
+
         it('renders overline', function (done) {
             const text = '\x1b[53mHello World';
             const result = '<span style="text-decoration:overline">Hello World</span>';
+
+            return test(text, result, done);
+        });
+
+        it.only('renders normal text', function (done) {
+            const text = '\x1b[1m\x1b[36mname\x1b[22m|';
+            const result = '<b><span style="color:#0AA">name<span style="font-weight:normal">|</span></span></b>';
 
             return test(text, result, done);
         });

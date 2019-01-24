@@ -146,7 +146,7 @@ function handleDisplay(stack, code, options) {
         4: () => pushTag(stack, 'u'),
         8: () => pushStyle(stack, 'display:none'),
         9: () => pushTag(stack, 'strike'),
-        22: () => closeTag(stack, 'b'),
+        22: () => pushStyle(stack, 'font-weight:normal'),
         23: () => closeTag(stack, 'i'),
         24: () => closeTag(stack, 'u'),
         39: () => pushForegroundColor(stack, options.fg),
