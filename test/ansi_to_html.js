@@ -274,20 +274,6 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
-        it('renders un-bold code appropriately', function (done) {
-            const text = '\x1b[1mHello\x1b[22m World';
-            const result = '<b>Hello</b> World';
-
-            return test(text, result, done);
-        });
-
-        it('skips rendering un-bold code appropriately', function (done) {
-            const text = 'Hello\x1b[22m World';
-            const result = 'Hello World';
-
-            return test(text, result, done);
-        });
-
         it('renders un-italic code appropriately', function (done) {
             const text = '\x1b[3mHello\x1b[23m World';
             const result = '<i>Hello</i> World';
@@ -309,7 +295,7 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
-        it.only('renders normal text', function (done) {
+        it('renders normal text', function (done) {
             const text = '\x1b[1m\x1b[36mname\x1b[22m|';
             const result = '<b><span style="color:#0AA">name<span style="font-weight:normal">|</span></span></b>';
 
