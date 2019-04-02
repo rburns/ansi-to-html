@@ -87,7 +87,7 @@ describe('ansi to html', function () {
 
         it('renders bold', function (done) {
             const text = 'bold: \x1b[1mstuff';
-            const result = 'bold: <b>stuff</b>';
+            const result = 'bold: <span style="font-weight:bold">stuff</span>';
 
             return test(text, result, done);
         });
@@ -101,35 +101,35 @@ describe('ansi to html', function () {
 
         it('handles resets', function (done) {
             const text = '\x1b[1mthis is bold\x1b[0m, but this isn\'t';
-            const result = '<b>this is bold</b>, but this isn\'t';
+            const result = '<span style="font-weight:bold">this is bold</span>, but this isn\'t';
 
             return test(text, result, done);
         });
 
         it('handles multiple resets', function (done) {
             const text = 'normal, \x1b[1mbold, \x1b[4munderline, \x1b[31mred\x1b[0m, normal';
-            const result = 'normal, <b>bold, <u>underline, <span style="color:' + '#A00">red</span></u></b>, normal';
+            const result = 'normal, <span style="font-weight:bold">bold, <u>underline, <span style="color:' + '#A00">red</span></u></span>, normal';
 
             return test(text, result, done);
         });
 
         it('handles resets with implicit 0', function (done) {
             const text = '\x1b[1mthis is bold\x1b[m, but this isn\'t';
-            const result = '<b>this is bold</b>, but this isn\'t';
+            const result = '<span style="font-weight:bold">this is bold</span>, but this isn\'t';
 
             return test(text, result, done);
         });
 
         it('renders multi-attribute sequences', function (done) {
             const text = 'normal, \x1b[1;4;31mbold, underline, and red\x1b[0m, normal';
-            const result = 'normal, <b><u><span style="color:#A00">bold, underline,' + ' and red</span></u></b>, normal';
+            const result = 'normal, <span style="font-weight:bold"><u><span style="color:#A00">bold, underline,' + ' and red</span></u></span>, normal';
 
             return test(text, result, done);
         });
 
         it('renders multi-attribute sequences with a semi-colon', function (done) {
             const text = 'normal, \x1b[1;4;31;mbold, underline, and red\x1b[0m, normal';
-            const result = 'normal, <b><u><span style="color:#A00">bold, underline, and red</span></u></b>, normal';
+            const result = 'normal, <span style="font-weight:bold"><u><span style="color:#A00">bold, underline, and red</span></u></span>, normal';
 
             return test(text, result, done);
         });
@@ -192,7 +192,7 @@ describe('ansi to html', function () {
 
         it('renders two escape sequences in sequence', function (done) {
             const text = 'months remaining\x1b[1;31mtimes\x1b[m\x1b[1;32mmultiplied by\x1b[m $10';
-            const result = 'months remaining<b><span style="color:#A00">times</span></b><b><span style="color:#0A0">multiplied by</span></b> $10';
+            const result = 'months remaining<span style="font-weight:bold"><span style="color:#A00">times</span></span><span style="font-weight:bold"><span style="color:#0A0">multiplied by</span></span> $10';
 
             return test(text, result, done);
         });
@@ -213,7 +213,7 @@ describe('ansi to html', function () {
 
         it('drops EL code with 0 parameter after new line character', function (done) {
             const text = 'HELLO\n\x1b[0K\u001b[33;1mWORLD\u001b[0m\n';
-            const result = 'HELLO\n<span style="color:#A50"><b>WORLD</b></span>\n';
+            const result = 'HELLO\n<span style="color:#A50"><span style="font-weight:bold">WORLD</span></span>\n';
 
             return test(text, result, done);
         });
@@ -306,7 +306,7 @@ describe('ansi to html', function () {
     describe('with escapeXML option enabled', function () {
         it('escapes XML entities', function (done) {
             const text = 'normal, \x1b[1;4;31;mbold, <underline>, and red\x1b[0m, normal';
-            const result = 'normal, <b><u><span style="color:#A00">bold, &lt;underline&gt;, and red</span></u></b>, normal';
+            const result = 'normal, <span style="font-weight:bold"><u><span style="color:#A00">bold, &lt;underline&gt;, and red</span></u></span>, normal';
 
             return test(text, result, done, {escapeXML: true});
         });
@@ -352,14 +352,14 @@ describe('ansi to html', function () {
 
         it('removes one state when encountering a reset', function (done) {
             const text = ['\x1b[1mthis is bold\x1b[0m, but this isn\'t', ' nor is this'];
-            const result = '<b>this is bold</b>, but this isn\'t nor is this';
+            const result = '<span style="font-weight:bold">this is bold</span>, but this isn\'t nor is this';
 
             return test(text, result, done, {stream: true});
         });
 
         it('removes multiple state when encountering a reset', function (done) {
             const text = ['\x1b[1mthis \x1b[9mis bold\x1b[0m, but this isn\'t', ' nor is this'];
-            const result = '<b>this <strike>is bold</strike></b>, but this isn\'t nor is this';
+            const result = '<span style="font-weight:bold">this <strike>is bold</strike></span>, but this isn\'t nor is this';
 
             return test(text, result, done, {stream: true});
         });
