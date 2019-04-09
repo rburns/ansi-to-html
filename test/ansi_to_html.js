@@ -274,9 +274,16 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
-        it('renders overline', function (done) {
+        it('renders overline on', function (done) {
             const text = '\x1b[53mHello World';
             const result = '<span style="text-decoration:overline">Hello World</span>';
+
+            return test(text, result, done);
+        });
+
+        it('renders overline off', function (done) {
+            const text = '\x1b[53mHello \x1b[55mWorld';
+            const result = '<span style="text-decoration:overline">Hello <span style="text-decoration:none">World</span></span>';
 
             return test(text, result, done);
         });

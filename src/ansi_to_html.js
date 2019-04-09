@@ -151,7 +151,8 @@ function handleDisplay(stack, code, options) {
         24: () => pushStyle(stack, 'text-decoration:none'),
         39: () => pushForegroundColor(stack, options.fg),
         49: () => pushBackgroundColor(stack, options.bg),
-        53: () => pushStyle(stack, 'text-decoration:overline')
+        53: () => pushStyle(stack, 'text-decoration:overline'),
+        55: () => pushStyle(stack, 'text-decoration:none')
     };
 
     if (codeMap[code]) {
