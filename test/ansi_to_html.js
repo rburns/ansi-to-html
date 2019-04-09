@@ -80,7 +80,7 @@ describe('ansi to html', function () {
 
         it('renders underline', function (done) {
             const text = 'underline: \x1b[4mstuff';
-            const result = 'underline: <u>stuff</u>';
+            const result = 'underline: <span style="text-decoration:underline">stuff</span>';
 
             return test(text, result, done);
         });
@@ -108,7 +108,7 @@ describe('ansi to html', function () {
 
         it('handles multiple resets', function (done) {
             const text = 'normal, \x1b[1mbold, \x1b[4munderline, \x1b[31mred\x1b[0m, normal';
-            const result = 'normal, <span style="font-weight:bold">bold, <u>underline, <span style="color:' + '#A00">red</span></u></span>, normal';
+            const result = 'normal, <span style="font-weight:bold">bold, <span style="text-decoration:underline">underline, <span style="color:' + '#A00">red</span></span></span>, normal';
 
             return test(text, result, done);
         });
@@ -122,14 +122,14 @@ describe('ansi to html', function () {
 
         it('renders multi-attribute sequences', function (done) {
             const text = 'normal, \x1b[1;4;31mbold, underline, and red\x1b[0m, normal';
-            const result = 'normal, <span style="font-weight:bold"><u><span style="color:#A00">bold, underline,' + ' and red</span></u></span>, normal';
+            const result = 'normal, <span style="font-weight:bold"><span style="text-decoration:underline"><span style="color:#A00">bold, underline,' + ' and red</span></span></span>, normal';
 
             return test(text, result, done);
         });
 
         it('renders multi-attribute sequences with a semi-colon', function (done) {
             const text = 'normal, \x1b[1;4;31;mbold, underline, and red\x1b[0m, normal';
-            const result = 'normal, <span style="font-weight:bold"><u><span style="color:#A00">bold, underline, and red</span></u></span>, normal';
+            const result = 'normal, <span style="font-weight:bold"><span style="text-decoration:underline"><span style="color:#A00">bold, underline, and red</span></span></span>, normal';
 
             return test(text, result, done);
         });
@@ -178,14 +178,7 @@ describe('ansi to html', function () {
 
         it('is able to disable underline', function (done) {
             const text = 'underline: \x1b[4mstuff\x1b[24mthings';
-            const result = 'underline: <u>stuff</u>things';
-
-            return test(text, result, done);
-        });
-
-        it('is able to skip disabling underline', function (done) {
-            const text = 'not underline: stuff\x1b[24mthings';
-            const result = 'not underline: stuffthings';
+            const result = 'underline: <span style="text-decoration:underline">stuff<span style="text-decoration:none">things</span></span>';
 
             return test(text, result, done);
         });
@@ -299,7 +292,7 @@ describe('ansi to html', function () {
     describe('with escapeXML option enabled', function () {
         it('escapes XML entities', function (done) {
             const text = 'normal, \x1b[1;4;31;mbold, <underline>, and red\x1b[0m, normal';
-            const result = 'normal, <span style="font-weight:bold"><u><span style="color:#A00">bold, &lt;underline&gt;, and red</span></u></span>, normal';
+            const result = 'normal, <span style="font-weight:bold"><span style="text-decoration:underline"><span style="color:#A00">bold, &lt;underline&gt;, and red</span></span></span>, normal';
 
             return test(text, result, done, {escapeXML: true});
         });
