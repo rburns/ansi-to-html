@@ -94,7 +94,7 @@ describe('ansi to html', function () {
 
         it('renders italic', function (done) {
             const text = 'italic: \x1b[3mstuff';
-            const result = 'italic: <i>stuff</i>';
+            const result = 'italic: <span style="font-style:italic">stuff</span>';
 
             return test(text, result, done);
         });
@@ -276,14 +276,7 @@ describe('ansi to html', function () {
 
         it('renders un-italic code appropriately', function (done) {
             const text = '\x1b[3mHello\x1b[23m World';
-            const result = '<i>Hello</i> World';
-
-            return test(text, result, done);
-        });
-
-        it('skips rendering un-italic code appropriately', function (done) {
-            const text = 'Hello\x1b[23m World';
-            const result = 'Hello World';
+            const result = '<span style="font-style:italic">Hello<span style="font-style:normal"> World</span></span>';
 
             return test(text, result, done);
         });
