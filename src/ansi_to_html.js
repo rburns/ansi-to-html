@@ -294,23 +294,6 @@ function pushBackgroundColor(stack, color) {
 }
 
 /**
- * @param {Array} stack
- * @param {string} style
- * @returns {string}
- */
-function closeTag(stack, style) {
-    var last;
-
-    if (stack.slice(-1)[0] === style) {
-        last = stack.pop();
-    }
-
-    if (last) {
-        return '</' + style + '>';
-    }
-}
-
-/**
  * @param {string} text
  * @param {object} options
  * @param {function} callback
