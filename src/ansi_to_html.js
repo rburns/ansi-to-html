@@ -145,7 +145,7 @@ function handleDisplay(stack, code, options) {
         3: () => pushStyle(stack, 'font-style:italic'),
         4: () => pushStyle(stack, 'text-decoration:underline'),
         8: () => pushStyle(stack, 'display:none'),
-        9: () => pushTag(stack, 'strike'),
+        9: () => pushStyle(stack, 'text-decoration:line-through'),
         22: () => pushStyle(stack, 'font-weight:normal;text-decoration:none;font-style:normal'),
         23: () => pushStyle(stack, 'font-style:normal'),
         24: () => pushStyle(stack, 'text-decoration:none'),

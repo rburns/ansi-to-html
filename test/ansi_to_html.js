@@ -66,7 +66,7 @@ describe('ansi to html', function () {
 
         it('renders strikethrough', function (done) {
             const text = 'strike: \x1b[9mthat';
-            const result = 'strike: <strike>that</strike>';
+            const result = 'strike: <span style="text-decoration:line-through">that</span>';
 
             return test(text, result, done);
         });
@@ -352,7 +352,7 @@ describe('ansi to html', function () {
 
         it('removes multiple state when encountering a reset', function (done) {
             const text = ['\x1b[1mthis \x1b[9mis bold\x1b[0m, but this isn\'t', ' nor is this'];
-            const result = '<span style="font-weight:bold">this <strike>is bold</strike></span>, but this isn\'t nor is this';
+            const result = '<span style="font-weight:bold">this <span style="text-decoration:line-through">is bold</span></span>, but this isn\'t nor is this';
 
             return test(text, result, done, {stream: true});
         });
