@@ -149,6 +149,7 @@ function handleDisplay(stack, code, options) {
         22: () => pushStyle(stack, 'font-weight:normal;text-decoration:none;font-style:normal'),
         23: () => pushStyle(stack, 'font-style:normal'),
         24: () => pushStyle(stack, 'text-decoration:none'),
+        29: () => pushStyle(stack, 'text-decoration:none'),
         39: () => pushForegroundColor(stack, options.fg),
         49: () => pushBackgroundColor(stack, options.bg),
         53: () => pushStyle(stack, 'text-decoration:overline'),
