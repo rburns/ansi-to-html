@@ -296,8 +296,8 @@ describe('ansi to html', function () {
         });
 
         it('renders normal text', function (done) {
-            const text = '\x1b[1m\x1b[36mname\x1b[22m|';
-            const result = '<b><span style="color:#0AA">name<span style="font-weight:normal">|</span></span></b>';
+            const text = '\x1b[22mnormal text';
+            const result = '<span style="font-weight:normal;text-decoration:none;font-style:normal">normal text</span>';
 
             return test(text, result, done);
         });
