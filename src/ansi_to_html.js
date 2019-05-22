@@ -422,7 +422,7 @@ function tokenize(text, options, callback) {
 
     let handler;
     const results1 = [];
-    let length = text.length;
+    let {length} = text;
 
     outer:
     while (length > 0) {
@@ -433,7 +433,7 @@ function tokenize(text, options, callback) {
             if (text.length !== length) {
                 // We matched a token and removed it from the text. We need to
                 // start matching *all* tokens against the new text.
-                length = text.length;
+                ({length} = text);
                 continue outer;
             }
         }
@@ -444,7 +444,7 @@ function tokenize(text, options, callback) {
             results1.push(0);
         }
 
-        length = text.length;
+        ({length} = text);
     }
 
     return results1;
@@ -482,8 +482,7 @@ function Filter(options) {
 Filter.prototype = {
     toHtml (input) {
         input = typeof input === 'string' ? [input] : input;
-        const stack = this.stack;
-        const options = this.opts;
+        const {stack, opts: options} = this;
         const buf = [];
 
         this.stickyStack.forEach(element => {
