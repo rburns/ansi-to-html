@@ -432,7 +432,7 @@ function tokenize(text, options, callback) {
             if (text.length !== length) {
                 // We matched a token and removed it from the text. We need to
                 // start matching *all* tokens against the new text.
-                ({length} = text);
+                length = text.length;
                 continue outer;
             }
         }
@@ -442,7 +442,7 @@ function tokenize(text, options, callback) {
         }
         results1.push(0);
 
-        ({length} = text);
+        length = text.length;
     }
 
     return results1;
@@ -473,13 +473,13 @@ class Filter {
             options.colors = Object.assign({}, defaults.colors, options.colors);
         }
 
-        this.opts = Object.assign({}, defaults, options);
+        this.options = Object.assign({}, defaults, options);
         this.stack = [];
         this.stickyStack = [];
     }
     toHtml (input) {
         input = typeof input === 'string' ? [input] : input;
-        const {stack, opts: options} = this;
+        const {stack, options} = this;
         const buf = [];
 
         this.stickyStack.forEach(element => {
