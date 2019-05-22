@@ -1,9 +1,8 @@
 /* globals describe, it*/
 
 const childProcess = require('child_process');
-const expect = require('chai').expect;
-
-const EOL = require('os').EOL;
+const {expect} = require('chai');
+const {EOL} = require('os');
 
 function getColorCmd(cmd) {
     const cmds = {
