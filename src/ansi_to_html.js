@@ -152,24 +152,24 @@ function handleDisplay(stack, code, options) {
     const codeMap = {
         '-1': () => '<br/>',
         0: () => stack.length && resetStyles(stack),
-        1: () => pushTag(stack, 'b'),
-        3: () => pushTag(stack, 'i'),
-        4: () => pushTag(stack, 'u'),
-        8: () => pushStyle(stack, 'display:none'),
-        9: () => pushTag(stack, 'strike'),
-        22: () => pushStyle(stack, 'font-weight:normal;text-decoration:none;font-style:normal'),
-        23: () => closeTag(stack, 'i'),
-        24: () => closeTag(stack, 'u'),
+        1: () => pushStyle(stack, 'font-weight:bold;'),
+        3: () => pushStyle(stack, 'font-style:italic;'),
+        4: () => pushStyle(stack, 'text-decoration:underline;'),
+        5: () => pushStyle(stack, 'animation:blink 1s linear infinite;'),
+        6: () => pushStyle(stack, 'animation:blink 0.3s linear infinite;'),
+        8: () => pushStyle(stack, 'display:none;'),
+        9: () => pushStyle(stack, 'text-decoration:line-through;'),
+        22: () => pushStyle(stack, 'font-weight:normal;text-decoration:none;font-style:normal;'),
+        23: () => pushStyle(stack, 'font-style:normal;'),
+        24: () => pushStyle(stack, 'text-decoration:none;'),
         39: () => pushForegroundColor(stack, options.fg),
         49: () => pushBackgroundColor(stack, options.bg),
-        53: () => pushStyle(stack, 'text-decoration:overline')
+        53: () => pushStyle(stack, 'text-decoration:overline;')
     };
 
     let result;
     if (codeMap[code]) {
         result = codeMap[code]();
-    } else if (4 < code && code < 7) {
-        result = pushTag(stack, 'blink');
     } else if (29 < code && code < 38) {
         result = pushForegroundColor(stack, options.colors[code - 30]);
     } else if ((39 < code && code < 48)) {
@@ -292,32 +292,15 @@ function pushTag(stack, tag, style) {
  * @returns {string}
  */
 function pushStyle(stack, style) {
-    return pushTag(stack, 'span', style);
+    return pushTag(stack, 'a', style);
 }
 
 function pushForegroundColor(stack, color) {
-    return pushTag(stack, 'span', 'color:' + color);
+    return pushTag(stack, 'a', 'color:' + color);
 }
 
 function pushBackgroundColor(stack, color) {
-    return pushTag(stack, 'span', 'background-color:' + color);
-}
-
-/**
- * @param {Array} stack
- * @param {string} style
- * @returns {string}
- */
-function closeTag(stack, style) {
-    let last;
-
-    if (stack.slice(-1)[0] === style) {
-        last = stack.pop();
-    }
-
-    if (last) {
-        return '</' + style + '>';
-    }
+    return pushTag(stack, 'a', 'background-color:' + color);
 }
 
 /**

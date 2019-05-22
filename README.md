@@ -29,7 +29,7 @@ console.log(convert.toHtml('\x1b[30mblack\x1b[37mwhite'));
 
 /*
     prints:
-    <span style="color:#000">black<span style="color:#AAA">white</span></span>
+    <a style="color:#000">black<a style="color:#AAA">white</a></a>
 */
 ```
 
