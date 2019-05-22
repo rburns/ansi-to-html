@@ -439,9 +439,8 @@ function tokenize(text, options, callback) {
 
         if (text.length === length) {
             break;
-        } else {
-            results1.push(0);
         }
+        results1.push(0);
 
         ({length} = text);
     }
