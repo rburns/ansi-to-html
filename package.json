@@ -7,9 +7,9 @@
     "node": ">= 6.0.0"
   },
   "scripts": {
-    "build": "./node_modules/.bin/babel src --out-dir lib",
-    "lint": "./node_modules/.bin/eslint src test",
-    "test": "./node_modules/.bin/mocha --reporter tap"
+    "build": "babel src --out-dir lib",
+    "lint": "eslint src test",
+    "test": "mocha --reporter tap"
   },
   "repository": {
     "type": "git",
