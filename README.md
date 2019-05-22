@@ -81,9 +81,6 @@ Options can be be passed to the constructor to customize behaviour.
 
 ## Development
 
-[![](http://issuestats.com/github/rburns/ansi-to-html/badge/issue?style=flat)](http://issuestats.com/github/rburns/ansi-to-html)
-[![](http://issuestats.com/github/rburns/ansi-to-html/badge/pr?style=flat)](http://issuestats.com/github/rburns/ansi-to-html)
-
 Once you have the git repository cloned, install the dependencies:
 
 ```bash
