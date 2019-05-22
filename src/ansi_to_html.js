@@ -420,14 +420,13 @@ function tokenize(text, options, callback) {
         text = text.replace(handler.pattern, handler.sub);
     }
 
-    let handler;
     const results1 = [];
     let {length} = text;
 
     outer:
     while (length > 0) {
         for (let i = 0, o = 0, len = tokens.length; o < len; i = ++o) {
-            handler = tokens[i];
+            const handler = tokens[i];
             process(handler, i);
 
             if (text.length !== length) {
