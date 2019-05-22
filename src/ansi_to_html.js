@@ -141,17 +141,19 @@ function handleDisplay(stack, code, options) {
     const codeMap = {
         '-1': () => '<br/>',
         0: () => stack.length && resetStyles(stack),
-        1: () => pushTag(stack, 'b'),
-        3: () => pushTag(stack, 'i'),
-        4: () => pushTag(stack, 'u'),
+        1: () => pushStyle(stack, 'font-weight:bold'),
+        3: () => pushStyle(stack, 'font-style:italic'),
+        4: () => pushStyle(stack, 'text-decoration:underline'),
         8: () => pushStyle(stack, 'display:none'),
-        9: () => pushTag(stack, 'strike'),
+        9: () => pushStyle(stack, 'text-decoration:line-through'),
         22: () => pushStyle(stack, 'font-weight:normal;text-decoration:none;font-style:normal'),
-        23: () => closeTag(stack, 'i'),
-        24: () => closeTag(stack, 'u'),
+        23: () => pushStyle(stack, 'font-style:normal'),
+        24: () => pushStyle(stack, 'text-decoration:none'),
+        29: () => pushStyle(stack, 'text-decoration:none'),
         39: () => pushForegroundColor(stack, options.fg),
         49: () => pushBackgroundColor(stack, options.bg),
-        53: () => pushStyle(stack, 'text-decoration:overline')
+        53: () => pushStyle(stack, 'text-decoration:overline'),
+        55: () => pushStyle(stack, 'text-decoration:none')
     };
 
     if (codeMap[code]) {
@@ -289,23 +291,6 @@ function pushForegroundColor(stack, color) {
 
 function pushBackgroundColor(stack, color) {
     return pushTag(stack, 'span', 'background-color:' + color);
-}
-
-/**
- * @param {Array} stack
- * @param {string} style
- * @returns {string}
- */
-function closeTag(stack, style) {
-    var last;
-
-    if (stack.slice(-1)[0] === style) {
-        last = stack.pop();
-    }
-
-    if (last) {
-        return '</' + style + '>';
-    }
 }
 
 /**
