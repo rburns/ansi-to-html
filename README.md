@@ -36,36 +36,36 @@ npm install ansi-to-html
 
 ## Command line usage
 
-Process a file:
+When using ansi-to-html from the command line the stream option is set to `true`.
+Other options can be provided. See `ansi-to-html -h` for more detail.
+
+### Process a file
 
 ```bash
 ansi-to-html the_filename
 ```
 
-From STDIN:
+### From STDIN
 
 ```bash
 git log | ansi-to-html
 ```
 
-When using ansi-to-html from the command line the stream option is set to `true`. Other options can
-be provided. See `ansi-to-html -h` for more detail.
-
 ## Options
 
 Options can be be passed to the constructor to customize behaviour.
 
-**fg** <code>CSS color values</code> The default foreground color used when reset color codes are encountered.
+**fg** `<CSS color values>`. The default foreground color used when reset color codes are encountered.
 
-**bg** <code>CSS color values</code> The default background color used when reset color codes are encountered.
+**bg** `<CSS color values>`. The default background color used when reset color codes are encountered.
 
-**newline** <code>true or false</code> Convert newline characters to <code>&lt;br/&gt;</code>.
+**newline** `true` or `false`. Convert newline characters to `<br/>`.
 
-**escapeXML** <code>true or false</code> Generate HTML/XML entities.
+**escapeXML** `true` or `false`. Generate HTML/XML entities.
 
-**stream** <code>true or false</code> save style state across invocations of toHtml().
+**stream** `true` or `false`. Save style state across invocations of `toHtml()`.
 
-**colors** <code>Object/Array with values 0 - 255 containing CSS color values</code> Can override specific colors or the entire ANSI palette
+**colors** `Object`/`Array` (with values 0 - 255 containing CSS color values). Can override specific colors or the entire ANSI palette
 
 ### Default options
 
