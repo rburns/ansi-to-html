@@ -1,7 +1,5 @@
-/* globals describe, it*/
-
-const Filter = require('../lib/ansi_to_html.js');
 const {expect} = require('chai');
+const Filter = require('../lib/ansi_to_html.js');
 
 function test(text, result, done, opts) {
     if (!opts) {
