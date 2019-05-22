@@ -467,19 +467,18 @@ function updateStickyStack(stickyStack, token, data) {
     return stickyStack;
 }
 
-function Filter(options) {
-    options = options || {};
+class Filter {
+    constructor (options) {
+        options = options || {};
 
-    if (options.colors) {
-        options.colors = Object.assign({}, defaults.colors, options.colors);
+        if (options.colors) {
+            options.colors = Object.assign({}, defaults.colors, options.colors);
+        }
+
+        this.opts = Object.assign({}, defaults, options);
+        this.stack = [];
+        this.stickyStack = [];
     }
-
-    this.opts = Object.assign({}, defaults, options);
-    this.stack = [];
-    this.stickyStack = [];
-}
-
-Filter.prototype = {
     toHtml (input) {
         input = typeof input === 'string' ? [input] : input;
         const {stack, opts: options} = this;
@@ -511,6 +510,6 @@ Filter.prototype = {
 
         return buf.join('');
     }
-};
+}
 
 module.exports = Filter;
