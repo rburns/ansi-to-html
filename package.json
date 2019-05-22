@@ -7,14 +7,15 @@
     "node": "*"
   },
   "scripts": {
-    "build": "./node_modules/.bin/babel src --out-dir lib",
-    "lint": "./node_modules/.bin/eslint src test",
-    "test": "./node_modules/.bin/mocha --reporter tap"
+    "build": "babel src --out-dir lib",
+    "lint": "eslint src test",
+    "test": "mocha --reporter tap"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/rburns/ansi-to-html.git"
   },
+  "homepage": "https://github.com/rburns/ansi-to-html",
   "bugs": {
     "url": "https://github.com/rburns/ansi-to-html/issues"
   },
@@ -59,21 +60,22 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.4.0",
-    "chai": "~3.5.0",
-    "eslint": "^3.13.1",
-    "mocha": "^3.2.0"
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "chai": "~4.2.0",
+    "eslint": "^5.16.0",
+    "mocha": "^6.1.4"
   },
   "dependencies": {
-    "entities": "^1.1.1"
+    "entities": "^1.1.2"
   },
   "bin": {
     "ansi-to-html": "./bin/ansi-to-html"
   },
   "babel": {
     "presets": [
-      "env"
+      "@babel/env"
     ]
   }
 }

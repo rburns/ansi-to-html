@@ -65,7 +65,7 @@ function setStyleColor(red, green, blue, colors) {
  * @returns {string}
  */
 function toHexString(num) {
-    var str = num.toString(16);
+    let str = num.toString(16);
 
     while (str.length < 2) {
         str = '0' + str;
@@ -80,10 +80,10 @@ function toHexString(num) {
  * @returns {string}
  */
 function toColorHexString(ref) {
-    var results = [];
+    const results = [];
 
-    for (var j = 0, len = ref.length; j < len; j++) {
-        results.push(toHexString(ref[j]));
+    for (const r of ref) {
+        results.push(toHexString(r));
     }
 
     return '#' + results.join('');
@@ -96,7 +96,7 @@ function toColorHexString(ref) {
  * @param {object} options
  */
 function generateOutput(stack, token, data, options) {
-    var result;
+    let result;
 
     if (token === 'text') {
         result = pushText(data, options);
@@ -136,7 +136,6 @@ function handleRgb(stack, data) {
  */
 function handleDisplay(stack, code, options) {
     code = parseInt(code, 10);
-    var result;
 
     const codeMap = {
         '-1': () => '<br/>',
@@ -154,6 +153,7 @@ function handleDisplay(stack, code, options) {
         53: () => pushStyle(stack, 'text-decoration:overline')
     };
 
+    let result;
     if (codeMap[code]) {
         result = codeMap[code]();
     } else if (4 < code && code < 7) {
@@ -176,7 +176,7 @@ function handleDisplay(stack, code, options) {
  * @returns {string}
  */
 function resetStyles(stack) {
-    var stackClone = stack.slice(0);
+    const stackClone = stack.slice(0);
 
     stack.length = 0;
 
@@ -195,7 +195,7 @@ function resetStyles(stack) {
 function range(low, high) {
     const results = [];
 
-    for (var j = low; j <= high; j++) {
+    for (let j = low; j <= high; j++) {
         results.push(j);
     }
 
@@ -222,7 +222,7 @@ function notCategory(category) {
  */
 function categoryForCode(code) {
     code = parseInt(code, 10);
-    var result = null;
+    let result = null;
 
     if (code === 0) {
         result = 'all';
@@ -297,7 +297,7 @@ function pushBackgroundColor(stack, color) {
  * @returns {string}
  */
 function closeTag(stack, style) {
-    var last;
+    let last;
 
     if (stack.slice(-1)[0] === style) {
         last = stack.pop();
@@ -315,8 +315,8 @@ function closeTag(stack, style) {
  * @returns {Array}
  */
 function tokenize(text, options, callback) {
-    var ansiMatch = false;
-    var ansiHandler = 3;
+    let ansiMatch = false;
+    const ansiHandler = 3;
 
     function remove() {
         return '';
@@ -345,8 +345,8 @@ function tokenize(text, options, callback) {
 
         g1 = g1.trimRight(';').split(';');
 
-        for (var o = 0, len = g1.length; o < len; o++) {
-            callback('display', g1[o]);
+        for (const g of g1) {
+            callback('display', g);
         }
 
         return '';
@@ -420,14 +420,13 @@ function tokenize(text, options, callback) {
         text = text.replace(handler.pattern, handler.sub);
     }
 
-    var handler;
-    var results1 = [];
-    var length = text.length;
+    const results1 = [];
+    let {length} = text;
 
     outer:
     while (length > 0) {
-        for (var i = 0, o = 0, len = tokens.length; o < len; i = ++o) {
-            handler = tokens[i];
+        for (let i = 0, o = 0, len = tokens.length; o < len; i = ++o) {
+            const handler = tokens[i];
             process(handler, i);
 
             if (text.length !== length) {
@@ -440,9 +439,8 @@ function tokenize(text, options, callback) {
 
         if (text.length === length) {
             break;
-        } else {
-            results1.push(0);
         }
+        results1.push(0);
 
         length = text.length;
     }
@@ -461,33 +459,31 @@ function tokenize(text, options, callback) {
 function updateStickyStack(stickyStack, token, data) {
     if (token !== 'text') {
         stickyStack = stickyStack.filter(notCategory(categoryForCode(data)));
-        stickyStack.push({token: token, data: data, category: categoryForCode(data)});
+        stickyStack.push({token, data, category: categoryForCode(data)});
     }
 
     return stickyStack;
 }
 
-function Filter(options) {
-    options = options || {};
+class Filter {
+    constructor (options) {
+        options = options || {};
 
-    if (options.colors) {
-        options.colors = Object.assign({}, defaults.colors, options.colors);
+        if (options.colors) {
+            options.colors = Object.assign({}, defaults.colors, options.colors);
+        }
+
+        this.options = Object.assign({}, defaults, options);
+        this.stack = [];
+        this.stickyStack = [];
     }
-
-    this.opts = Object.assign({}, defaults, options);
-    this.stack = [];
-    this.stickyStack = [];
-}
-
-Filter.prototype = {
     toHtml (input) {
         input = typeof input === 'string' ? [input] : input;
-        const stack = this.stack;
-        const options = this.opts;
+        const {stack, options} = this;
         const buf = [];
 
         this.stickyStack.forEach(element => {
-            var output = generateOutput(stack, element.token, element.data, options);
+            const output = generateOutput(stack, element.token, element.data, options);
 
             if (output) {
                 buf.push(output);
@@ -495,7 +491,7 @@ Filter.prototype = {
         });
 
         tokenize(input.join(''), options, (token, data) => {
-            var output = generateOutput(stack, token, data, options);
+            const output = generateOutput(stack, token, data, options);
 
             if (output) {
                 buf.push(output);
@@ -512,6 +508,6 @@ Filter.prototype = {
 
         return buf.join('');
     }
-};
+}
 
 module.exports = Filter;

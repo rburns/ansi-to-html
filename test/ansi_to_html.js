@@ -1,14 +1,12 @@
-/* globals describe, it*/
-
+const {expect} = require('chai');
 const Filter = require('../lib/ansi_to_html.js');
-const expect = require('chai').expect;
 
 function test(text, result, done, opts) {
     if (!opts) {
         opts = {};
     }
 
-    var f = new Filter(opts);
+    const f = new Filter(opts);
 
     function filtered(memo, t) {
         return memo + f.toHtml(t);
