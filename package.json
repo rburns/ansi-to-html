@@ -15,6 +15,7 @@
     "type": "git",
     "url": "https://github.com/rburns/ansi-to-html.git"
   },
+  "homepage": "https://github.com/rburns/ansi-to-html",
   "bugs": {
     "url": "https://github.com/rburns/ansi-to-html/issues"
   },
@@ -59,14 +60,14 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.4.0",
-    "chai": "~3.5.0",
-    "eslint": "^3.13.1",
-    "mocha": "^3.2.0"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "chai": "~4.2.0",
+    "eslint": "^5.16.0",
+    "mocha": "^6.1.4"
   },
   "dependencies": {
-    "entities": "^1.1.1"
+    "entities": "^1.1.2"
   },
   "bin": {
     "ansi-to-html": "./bin/ansi-to-html"

@@ -5,21 +5,24 @@
 ![](https://img.shields.io/npm/dm/ansi-to-html.svg)
 
 This was originally a port of the ansi to html converter from
-[bcat](https://github.com/rtomayko/bcat/blob/master/lib/bcat/ansi.rb) to Javascript. It has since
-undergone quite a lot of modification.
+[bcat](https://github.com/rtomayko/bcat/blob/master/lib/bcat/ansi.rb) to
+JavaScript. It has since undergone quite a lot of modification.
 
 It has a few additions:
 
-* The API has been altered to accept options in the constructor, and input in <code>toHtml()</code>.
+* The API has been altered to accept options in the constructor, and input in `toHtml()`.
 * ANSI codes for setting the foreground or background color to default are handled
-* the 'erase in line' escape code (\x1b[K) is dropped from the output.
+* the 'erase in line' escape code (`\x1b[K`) is dropped from the output.
 
 ## Installation
 
-	npm install ansi-to-html
+```bash
+npm install ansi-to-html
+```
 
 ## Usage
 
+```javascript
 	var Convert = require('ansi-to-html');
 	var convert = new Convert();
 
@@ -29,6 +32,7 @@ It has a few additions:
 		prints:
 		<span style="color:#000">black<span style="color:#AAA">white</span></span>
 	*/
+```
 
 ## Command line usage
 
@@ -82,17 +86,25 @@ Options can be be passed to the constructor to customize behaviour.
 
 Once you have the git repository cloned, install the dependencies:
 
-    cd ansi-to-html
-    npm install
+```bash
+cd ansi-to-html
+npm install
+```
 
 Lint
 
-    npm run lint
+```bash
+npm run lint
+```
 
 Build
 
-    npm run build
+```bash
+npm run build
+```
 
 Test
 
-    npm test
+```bash
+npm test
+```
