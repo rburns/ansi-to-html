@@ -1,6 +1,8 @@
 'use strict';
 const entities = require('entities');
 const defaults = {
+    // 3: 'italic', // || 'inverse'
+    21: 'double-underline', // || bold-off
     fg: '#FFF',
     bg: '#000',
     newline: false,
@@ -153,23 +155,44 @@ function handleDisplay(stack, code, options) {
         '-1': () => '<br/>',
         0: () => stack.length && resetStyles(stack),
         1: () => pushStyle(stack, 'font-weight:bold;'),
+        2: () => pushStyle(stack, 'font-weight:lighter;'),
+        // 3: Should also support inverse option
         3: () => pushStyle(stack, 'font-style:italic;'),
         4: () => pushStyle(stack, 'text-decoration:underline;'),
         5: () => pushStyle(stack, 'animation:blink 1s linear infinite;'),
         6: () => pushStyle(stack, 'animation:blink 0.3s linear infinite;'),
+        // 7: "Reverse video" (swap foreground/background)
         8: () => pushStyle(stack, 'display:none;'),
         9: () => pushStyle(stack, 'text-decoration:line-through;'),
+        10: () => pushStyle(stack, 'font-family:initial;'),
+        // 20: Fraktur (font)
+        21: () => options['21'] === 'bold-off'
+            ? pushStyle(stack, 'font-weight:normal;')
+            : pushStyle(stack, 'text-decoration:underline double;'),
         22: () => pushStyle(stack, 'font-weight:normal;text-decoration:none;font-style:normal;'),
         23: () => pushStyle(stack, 'font-style:normal;'),
         24: () => pushStyle(stack, 'text-decoration:none;'),
+        25: () => pushStyle(stack, 'animation:none;'),
+        // 27: Inverse off
+        28: () => pushStyle(stack, 'display:inline;'),
+        29: () => pushStyle(stack, 'text-decoration:none;'),
+        // 38: Set foreground color
         39: () => pushForegroundColor(stack, options.fg),
+        // 48: Set background color
         49: () => pushBackgroundColor(stack, options.bg),
-        53: () => pushStyle(stack, 'text-decoration:overline;')
+        // 51: Framed
+        // 52: Encircled
+        53: () => pushStyle(stack, 'text-decoration:overline;'),
+        // 54: Not framed or encircled
+        55: () => pushStyle(stack, 'text-decoration:none;')
+        // 60-65: ideogram-related: https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_parameters
     };
 
     let result;
     if (codeMap[code]) {
         result = codeMap[code]();
+    } else if (10 < code && code < 20 && options.alternativeFonts) {
+        result = pushStyle(stack, 'font-family:' + options.alternativeFonts[code] + ';');
     } else if (29 < code && code < 38) {
         result = pushForegroundColor(stack, options.colors[code - 30]);
     } else if ((39 < code && code < 48)) {
