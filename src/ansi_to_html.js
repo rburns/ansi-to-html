@@ -466,6 +466,15 @@ function updateStickyStack(stickyStack, token, data) {
 }
 
 class Filter {
+    /**
+     * @param {object} options
+     * @param {string=} options.fg The default foreground color used when reset color codes are encountered.
+     * @param {string=} options.bg The default background color used when reset color codes are encountered.
+     * @param {boolean=} options.newline Convert newline characters to `<br/>`.
+     * @param {boolean=} options.escapeXML Generate HTML/XML entities.
+     * @param {boolean=} options.stream Save style state across invocations of `toHtml()`.
+     * @param {(string[] | {[code: number]: string})=} options.colors Can override specific colors or the entire ANSI palette. 
+     */
     constructor (options) {
         options = options || {};
 
@@ -477,6 +486,10 @@ class Filter {
         this.stack = [];
         this.stickyStack = [];
     }
+    /**
+     * @param {string | string[]} input
+     * @returns {string}
+     */
     toHtml (input) {
         input = typeof input === 'string' ? [input] : input;
         const {stack, options} = this;
