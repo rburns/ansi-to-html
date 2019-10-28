@@ -8,8 +8,10 @@
   },
   "scripts": {
     "build": "babel src --out-dir lib",
+    "build:watch": "babel src --out-dir lib --watch",
     "lint": "eslint src test",
-    "test": "mocha --reporter tap"
+    "test": "mocha --reporter tap",
+    "test:watch": "mocha --reporter tap --watch ./test ./"
   },
   "repository": {
     "type": "git",
