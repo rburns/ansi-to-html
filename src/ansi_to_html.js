@@ -383,6 +383,9 @@ function tokenize(text, options, callback) {
     }, {
         pattern: /^\n/,
         sub: newline
+    },{
+        pattern: /^\r\n/,
+        sub: newline
     }, {
         pattern: /^\x1b\[((?:\d{1,3};?)+|)m/,
         sub: ansiMess
@@ -406,7 +409,14 @@ function tokenize(text, options, callback) {
         pattern: /^\x1b\[?[\d;]{0,3}/,
         sub: remove
     }, {
-        pattern: /^([^\x1b\x08\n]+)/,
+        /**
+         * extracts real text - not containing:
+         * - `\x1b' - ESC - escape (Ascii 27)
+         * - '\x08' - BS - backspace (Ascii 8)
+         * - `\n` - Newline - linefeed (LF) (ascii 10)
+         * - `\r` - Windows Carriage Return (CR)
+         */
+        pattern: /^(([^\x1b\x08\r\n])+)/,
         sub: realText
     }];
 
@@ -473,7 +483,7 @@ class Filter {
      * @param {boolean=} options.newline Convert newline characters to `<br/>`.
      * @param {boolean=} options.escapeXML Generate HTML/XML entities.
      * @param {boolean=} options.stream Save style state across invocations of `toHtml()`.
-     * @param {(string[] | {[code: number]: string})=} options.colors Can override specific colors or the entire ANSI palette. 
+     * @param {(string[] | {[code: number]: string})=} options.colors Can override specific colors or the entire ANSI palette.
      */
     constructor (options) {
         options = options || {};
