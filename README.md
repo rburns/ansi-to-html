@@ -69,7 +69,7 @@ Options can be be passed to the constructor to customize behaviour.
 
 ### Default options
 
-```javascript
+```json5
 {
     fg: '#FFF',
     bg: '#000',
@@ -88,20 +88,35 @@ cd ansi-to-html
 npm install
 ```
 
-Lint
+#### Lint
 
 ```bash
 npm run lint
 ```
 
-Build
+#### Build
 
 ```bash
 npm run build
 ```
 
-Test
+- Builds the `/src` files by running `babel`. 
+- Saves the built files in `/lib` output directory. 
+- Recommended to run `babel` in Watch mode - will re-build the project each time the files are changed.
+```bash
+npm run build:watch
+```
+
+#### Test
 
 ```bash
 npm test
 ```
+- Note: Runs the tests against the built files (in the `/lib` directory).
+- You also run the tests in watch mode (will rerun tests when files are changed).
+- Recommended to run the build in watch mode as well to re-build the project before the tests are run.
+
+```bash
+npm run test:watch
+```
+
