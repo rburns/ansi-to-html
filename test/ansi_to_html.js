@@ -27,9 +27,16 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
-        it('returns plain text when given plain text', function (done) {
+        it('returns plain text when given plain text with linefeed', function (done) {
             const text = 'test\ntest\n';
             const result = 'test\ntest\n';
+
+            return test(text, result, done);
+        });
+
+        it('returns plain text when given plain text with CR & LF', function (done) {
+            const text = 'testCRLF\r\ntest';
+            const result = 'testCRLF\r\ntest';
 
             return test(text, result, done);
         });
@@ -314,6 +321,13 @@ describe('ansi to html', function () {
         it('renders line breaks', function (done) {
             const text = 'test\ntest\n';
             const result = 'test<br/>test<br/>';
+
+            return test(text, result, done, {newline: true});
+        });
+
+        it('renders windows styled line breaks (CR+LF)', function (done) {
+            const text = 'testCRLF\r\ntestLF';
+            const result = 'testCRLF<br/>testLF';
 
             return test(text, result, done, {newline: true});
         });
