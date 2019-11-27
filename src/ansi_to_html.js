@@ -384,7 +384,7 @@ function tokenize(text, options, callback) {
         pattern: /^\n/,
         sub: newline
     },{
-        pattern: /^\r\n/,
+        pattern: /^\r+\n/,
         sub: newline
     }, {
         pattern: /^\x1b\[((?:\d{1,3};?)+|)m/,
