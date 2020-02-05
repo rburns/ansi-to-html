@@ -41,6 +41,13 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
+        it('returns plain text when given plain text with multi CR', function (done) {
+            const text = 'testCRLF\r\r\r\ntest';
+            const result = 'testCRLF\r\r\r\ntest';
+
+            return test(text, result, done);
+        });
+
         it('renders foreground colors', function (done) {
             const text = 'colors: \x1b[30mblack\x1b[37mwhite';
             const result = 'colors: <span style="color:#000">black<span style="color:#AAA">white</span></span>';
@@ -327,6 +334,13 @@ describe('ansi to html', function () {
 
         it('renders windows styled line breaks (CR+LF)', function (done) {
             const text = 'testCRLF\r\ntestLF';
+            const result = 'testCRLF<br/>testLF';
+
+            return test(text, result, done, {newline: true});
+        });
+
+        it('renders windows styled line breaks (multi CR+LF)', function (done) {
+            const text = 'testCRLF\r\r\r\ntestLF';
             const result = 'testCRLF<br/>testLF';
 
             return test(text, result, done, {newline: true});
