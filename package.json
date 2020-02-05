@@ -1,6 +1,6 @@
 {
   "name": "ansi-to-html",
-  "version": "0.6.13",
+  "version": "0.6.14",
   "description": "Convert ansi escaped text streams to html.",
   "main": "lib/ansi_to_html.js",
   "engines": {
@@ -70,6 +70,10 @@
     {
       "name": "Lior Chervinsky",
       "url": "https://github.com/lior-chervinsky"
+    },
+    {
+      "name": "Maple Miao",
+      "url": "https://github.com/mapleeit"
     }
   ],
   "license": "MIT",
