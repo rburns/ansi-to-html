@@ -1,3 +1,4 @@
+'use strict';
 const entities = require('entities');
 const defaults = {
     fg: '#FFF',
