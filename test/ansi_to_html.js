@@ -405,6 +405,24 @@ describe('ansi to html', function () {
 
     });
 
+    describe('with `space` option enabled', function () {
+        it('renders multiple spaces', function (done) {
+            const text = 'test  test  ';
+            const result = 'test &#xa0;test &#xa0;';
+
+            return test(text, result, done, {space: true});
+        });
+    });
+
+    describe('with `tabs` option enabled', function () {
+        it('renders multiple tabs', function (done) {
+            const text = 'test\ttest\t';
+            const result = 'test&#xa0;&#xa0;&#xa0;test&#xa0;&#xa0;&#xa0;';
+
+            return test(text, result, done, {tabs: 3});
+        });
+    });
+
     describe('with stream option enabled', function () {
         it('persists styles between toHtml() invocations', function (done) {
             const text = ['\x1b[31mred', 'also red'];

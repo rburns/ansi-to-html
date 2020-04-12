@@ -4,6 +4,8 @@ const defaults = {
     fg: '#FFF',
     bg: '#000',
     newline: false,
+    space: false,
+    tabs: null,
     escapeXML: false,
     stream: false,
     colors: getDefaultColors()
@@ -97,16 +99,23 @@ function toColorHexString(ref) {
  * @param {object} options
  */
 function generateOutput(stack, token, data, options) {
+    const {tabs, space, colors} = options;
     let result;
 
     if (token === 'text') {
+        if (space) {
+            data = data.replace(/ {2}/g, ' &#xa0;');
+        }
+        if (tabs) {
+            data = data.replace(/\t/g, '&#xa0;'.repeat(tabs));
+        }
         result = pushText(data, options);
     } else if (token === 'display') {
         result = handleDisplay(stack, data, options);
     } else if (token === 'xterm256Foreground') {
-        result = pushForegroundColor(stack, options.colors[data]);
+        result = pushForegroundColor(stack, colors[data]);
     } else if (token === 'xterm256Background') {
-        result = pushBackgroundColor(stack, options.colors[data]);
+        result = pushBackgroundColor(stack, colors[data]);
     } else if (token === 'rgb') {
         result = handleRgb(stack, data);
     }
