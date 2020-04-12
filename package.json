@@ -79,11 +79,11 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.7",
-    "@babel/preset-env": "^7.8.7",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
     "chai": "~4.2.0",
     "eslint": "^6.8.0",
-    "mocha": "^7.1.0"
+    "mocha": "^7.1.1"
   },
   "dependencies": {
     "entities": "^2.0.0"
