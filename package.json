@@ -9,7 +9,7 @@
   "scripts": {
     "build": "babel src --out-dir lib",
     "build:watch": "babel src --out-dir lib --watch",
-    "lint": "eslint src test",
+    "lint": "eslint .",
     "test": "mocha --reporter tap",
     "test:watch": "mocha --reporter tap --watch ./test ./"
   },
