@@ -1,3 +1,4 @@
+'use strict';
 const {expect} = require('chai');
 const Filter = require('../lib/ansi_to_html.js');
 
