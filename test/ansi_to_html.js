@@ -22,6 +22,13 @@ describe('ansi to html', function () {
             return test(text, result);
         });
 
+        it('extracts only real text', function () {
+            let text = 'some \x1b text';
+            let result = 'some  text';
+
+            return test(text, result);
+        });
+
         it('returns plain text when given plain text with linefeed', function () {
             const text = 'test\ntest\n';
             const result = 'test\ntest\n';
