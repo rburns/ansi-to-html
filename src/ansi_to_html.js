@@ -325,9 +325,6 @@ function closeTag(stack, style) {
  * @returns {Array}
  */
 function tokenize(text, options, callback) {
-    let ansiMatch = false;
-    const ansiHandler = 3;
-
     function remove() {
         return '';
     }
@@ -348,7 +345,6 @@ function tokenize(text, options, callback) {
     }
 
     function ansiMess(m, g1) {
-        ansiMatch = true;
         if (g1.trim().length === 0) {
             g1 = '0';
         }
@@ -430,13 +426,7 @@ function tokenize(text, options, callback) {
         sub: realText
     }];
 
-    function process(handler, i) {
-        if (i > ansiHandler && ansiMatch) {
-            return;
-        }
-
-        ansiMatch = false;
-
+    function process(handler) {
         text = text.replace(handler.pattern, handler.sub);
     }
 
