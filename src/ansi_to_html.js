@@ -446,13 +446,7 @@ function tokenize(text, options, callback) {
                 continue outer;
             }
         }
-
-        if (text.length === length) {
-            break;
-        }
-        results1.push(0);
-
-        length = text.length;
+        break;
     }
 
     return results1;
