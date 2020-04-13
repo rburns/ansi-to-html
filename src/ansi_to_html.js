@@ -272,7 +272,7 @@ function pushTag(stack, tag, style) {
 
     stack.push(tag);
 
-    return ['<' + tag, (style ? ' style="' + style + '"' : void 0), '>'].join('');
+    return `<${tag}${style ? ` style="${style}"` : ''}>`;
 }
 
 /**
