@@ -99,14 +99,23 @@ function toColorHexString(ref) {
 function generateOutput(stack, token, data, options) {
     let result;
 
-    if (token === 'text') {
-        result = pushText(data, options);
-    } else if (token === 'display') {
-        result = handleDisplay(stack, data, options);
-    } else if (token === 'xterm256') {
-        result = pushForegroundColor(stack, options.colors[data]);
-    } else if (token === 'rgb') {
-        result = handleRgb(stack, data);
+    switch (token) {
+        case 'text':
+            result = pushText(data, options);
+            break;
+        case 'display':
+            result = handleDisplay(stack, data, options);
+            break;
+        case 'xterm256':
+            result = pushForegroundColor(stack, options.colors[data]);
+            break;
+        case 'rgb':
+            result = handleRgb(stack, data);
+            break;
+        // istanbul ignore next
+        default:
+            // istanbul ignore next
+            throw new Error('Unexpected token type');
     }
 
     return result;
