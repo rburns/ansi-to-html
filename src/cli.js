@@ -7,17 +7,17 @@ const args = {
 let file = null,
     skip = false;
 
+const argv = process.argv.slice(2);
 for (
-    let i = 2, j = 2, ref = process.argv.length;
-    2 <= ref ? j < ref : j > ref;
-    i = 2 <= ref ? ++j : --j
+    let i = 0, len = argv.length;
+    i < len;
+    ++i
 ) {
     if (skip) {
         skip = false;
         continue;
     }
-
-    switch (process.argv[i]) {
+    switch (argv[i]) {
         case '-n':
         case '--newline':
             args.newline = true;
@@ -28,12 +28,12 @@ for (
             break;
         case '-f':
         case '--fg':
-            args.fg = process.argv[i + 1];
+            args.fg = argv[i + 1];
             skip = true;
             break;
         case '-b':
         case '--bg':
-            args.bg = process.argv[i + 1];
+            args.bg = argv[i + 1];
             skip = true;
             break;
         case '-v':
@@ -47,7 +47,7 @@ for (
             process.exit(0);
             break;
         default:
-            file = process.argv[i];
+            file = argv[i];
     }
 }
 
