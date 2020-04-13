@@ -22,6 +22,13 @@ describe('ansi to html', function () {
             return test(text, result);
         });
 
+        it('ends early on finding lack of match', function () {
+            const text = 'some \r text';
+            const result = 'some ';
+
+            test(text, result);
+        });
+
         it('extracts only real text', function () {
             let text = 'some \x1b text';
             let result = 'some  text';
