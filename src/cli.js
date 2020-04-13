@@ -40,11 +40,13 @@ for (
         case '--version':
             console.log(require(__dirname + '/../package.json').version);
             process.exit(0);
+            // istanbul ignore next
             break;
         case '-h':
         case '--help':
             console.log(help);
             process.exit(0);
+            // istanbul ignore next
             break;
         default:
             file = argv[i];
