@@ -98,9 +98,16 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
-        it('renders strikethrough', function (done) {
+        it('renders strikethrough on', function (done) {
             const text = 'strike: \x1b[9mthat';
             const result = 'strike: <a style="text-decoration:line-through;">that</a>';
+
+            return test(text, result, done);
+        });
+
+        it('renders strikethrough off', function (done) {
+            const text = 'strike: \x1b[9mthat\x1b[29m, no';
+            const result = 'strike: <a style="text-decoration:line-through;">that<a style="text-decoration:none;">, no</a></a>';
 
             return test(text, result, done);
         });
@@ -133,12 +140,62 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
+        it('renders lighter', function (done) {
+            const text = 'lighter: \x1b[2mstuff';
+            const result = 'lighter: <a style="font-weight:lighter;">stuff</a>';
+
+            return test(text, result, done);
+        });
+
         it('renders italic', function (done) {
             const text = 'italic: \x1b[3mstuff';
             const result = 'italic: <a style="font-style:italic;">stuff</a>';
 
             return test(text, result, done);
         });
+
+        it('renders conceal', function (done) {
+            const text = 'conceal: \x1b[8mstuff';
+            const result = 'conceal: <a style="display:none;">stuff</a>';
+
+            return test(text, result, done);
+        });
+
+        it('renders initial', function (done) {
+            const text = 'initial: \x1b[10mstuff';
+            const result = 'initial: <a style="font-family:initial;">stuff</a>';
+
+            return test(text, result, done);
+        });
+
+        it('renders double-underline', function (done) {
+            const text = 'double-underline: \x1b[21mstuff';
+            const result = 'double-underline: <a style="text-decoration:underline double;">stuff</a>';
+
+            return test(text, result, done);
+        });
+
+        it('renders bold-off', function (done) {
+            const text = 'bold-off: \x1b[21mstuff';
+            const result = 'bold-off: <a style="font-weight:normal;">stuff</a>';
+
+            return test(text, result, done, {21: 'bold-off'});
+        });
+
+        it('renders blink-off', function (done) {
+            const text = 'blink-off: \x1b[25mstuff';
+            const result = 'blink-off: <a style="animation:none;">stuff</a>';
+
+            return test(text, result, done);
+        });
+
+        it('renders reveal', function (done) {
+            const text = 'reveal: \x1b[28mstuff';
+            const result = 'reveal: <a style="display:inline;">stuff</a>';
+
+            return test(text, result, done);
+        });
+
 
         it('handles resets', function (done) {
             const text = '\x1b[1mthis is bold\x1b[0m, but this isn\'t';
@@ -336,9 +393,16 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
-        it('renders overline', function (done) {
+        it('renders overline on', function (done) {
             const text = '\x1b[53mHello World';
             const result = '<a style="text-decoration:overline;">Hello World</a>';
+
+            return test(text, result, done);
+        });
+
+        it('renders overline off', function (done) {
+            const text = '\x1b[53mHello \x1b[55mWorld';
+            const result = '<a style="text-decoration:overline;">Hello <a style="text-decoration:none;">World</a></a>';
 
             return test(text, result, done);
         });

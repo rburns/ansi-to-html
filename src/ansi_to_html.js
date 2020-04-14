@@ -296,17 +296,13 @@ function pushText(text, options) {
 /**
  * @param {Array} stack
  * @param {string} tag
- * @param {string} [style='']
+ * @param {string} style
  * @returns {string}
  */
 function pushTag(stack, tag, style) {
-    if (!style) {
-        style = '';
-    }
-
     stack.push(tag);
 
-    return `<${tag}${style ? ` style="${style}"` : ''}>`;
+    return `<${tag} style="${style}">`;
 }
 
 /**
