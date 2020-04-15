@@ -311,15 +311,15 @@ function pushTag(stack, tag, style) {
  * @returns {string}
  */
 function pushStyle(stack, style) {
-    return pushTag(stack, 'a', style);
+    return pushTag(stack, 'span', style);
 }
 
 function pushForegroundColor(stack, color) {
-    return pushTag(stack, 'a', 'color:' + color);
+    return pushTag(stack, 'span', 'color:' + color);
 }
 
 function pushBackgroundColor(stack, color) {
-    return pushTag(stack, 'a', 'background-color:' + color);
+    return pushTag(stack, 'span', 'background-color:' + color);
 }
 
 /**
