@@ -49,7 +49,7 @@ function runColorCLI (data, args, opts) {
 describe('cli', function () {
     it('converts colors', async function () {
         const data = echo('what\u001b[0;31m what?');
-        const result = `what<span style="color:#A00"> what?${EOL}</span>`;
+        const result = `what<a style="color:#A00"> what?${EOL}</a>`;
 
         const stdout = await runColorCLI(data);
         expect(stdout).to.equal(result);
