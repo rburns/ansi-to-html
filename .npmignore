@@ -2,3 +2,5 @@
 .travis.yml
 /node_modules/
 /src
+coverage
+.nyc_output
