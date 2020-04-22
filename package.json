@@ -7,8 +7,8 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "build": "babel src --out-dir lib",
-    "build:watch": "babel src --out-dir lib --watch",
+    "build": "babel src --source-maps --out-dir lib",
+    "build:watch": "babel src --source-maps --out-dir lib --watch",
     "lint": "eslint .",
     "test": "nyc mocha --reporter tap",
     "test:watch": "mocha --reporter tap --watch ./test ./"
