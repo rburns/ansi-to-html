@@ -1,6 +1,20 @@
 'use strict';
 /* eslint no-console:0 */
-const help = '\nuasge: ansi-to-html [options] [file]\n    \nfile:  The file to display or stdin\n    \noptions:    \n    \n    -f, --fg         The background color used for resets (#000)\n    -b, --bg         The foreground color used for resets (#FFF)\n    -n, --newline    Convert newline characters to <br/>  (false)\n    -x, --escapeXML  Generate XML entities                (false)\n    -v, --version    Print version\n    -h, --help       Print help\n    ';
+const help = `
+usage: ansi-to-html [options] [file]
+
+file:  The file to display or stdin
+
+options:
+
+    -f, --fg         The background color used for resets (#000)
+    -b, --bg         The foreground color used for resets (#FFF)
+    -n, --newline    Convert newline characters to <br/>  (false)
+    -x, --escapeXML  Generate XML entities                (false)
+    -v, --version    Print version
+    -h, --help       Print help
+`;
+
 const args = {
     stream: true
 };
