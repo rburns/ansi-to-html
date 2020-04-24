@@ -7,7 +7,7 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "build": "babel src --source-maps --out-dir lib",
+    "build": "babel src --source-maps --out-dir lib && cp ./src/ansi_to_html.d.ts ./lib",
     "build:watch": "babel src --source-maps --out-dir lib --watch",
     "lint": "eslint .",
     "test": "nyc mocha --reporter tap",
