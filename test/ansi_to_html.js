@@ -175,6 +175,20 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
+        it('renders inverse colors', function (done) {
+            const text = '\x1b[7mhello';
+            const result = '<span style="background-color:#FFF"><span style="background-color:#000">hello</span></span>';
+
+            return test(text, result, done);
+        });
+
+        it('clears inverse colors', function (done) {
+            const text = '';
+            const result = '';
+
+            return test(text, result, done);
+        });
+
         it('handles resetting to default foreground color', function (done) {
             const text = '\x1b[30mblack\x1b[39mdefault';
             const result = '<span style="color:#000">black<span style="color:#FFF">default</span></span>';
