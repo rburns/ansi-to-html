@@ -99,14 +99,23 @@ function toColorHexString(ref) {
 function generateOutput(stack, token, data, options) {
     let result;
 
-    if (token === 'text') {
-        result = pushText(data, options);
-    } else if (token === 'display') {
-        result = handleDisplay(stack, data, options);
-    } else if (token === 'xterm256') {
-        result = pushForegroundColor(stack, options.colors[data]);
-    } else if (token === 'rgb') {
-        result = handleRgb(stack, data);
+    switch (token) {
+        case 'text':
+            result = pushText(data, options);
+            break;
+        case 'display':
+            result = handleDisplay(stack, data, options);
+            break;
+        case 'xterm256':
+            result = pushForegroundColor(stack, options.colors[data]);
+            break;
+        case 'rgb':
+            result = handleRgb(stack, data);
+            break;
+        // istanbul ignore next
+        default:
+            // istanbul ignore next
+            throw new Error('Unexpected token type');
     }
 
     return result;
@@ -316,9 +325,6 @@ function closeTag(stack, style) {
  * @returns {Array}
  */
 function tokenize(text, options, callback) {
-    let ansiMatch = false;
-    const ansiHandler = 3;
-
     function remove() {
         return '';
     }
@@ -339,7 +345,6 @@ function tokenize(text, options, callback) {
     }
 
     function ansiMess(m, g1) {
-        ansiMatch = true;
         if (g1.trim().length === 0) {
             g1 = '0';
         }
@@ -421,13 +426,7 @@ function tokenize(text, options, callback) {
         sub: realText
     }];
 
-    function process(handler, i) {
-        if (i > ansiHandler && ansiMatch) {
-            return;
-        }
-
-        ansiMatch = false;
-
+    function process(handler) {
         text = text.replace(handler.pattern, handler.sub);
     }
 
@@ -447,13 +446,7 @@ function tokenize(text, options, callback) {
                 continue outer;
             }
         }
-
-        if (text.length === length) {
-            break;
-        }
-        results1.push(0);
-
-        length = text.length;
+        break;
     }
 
     return results1;
