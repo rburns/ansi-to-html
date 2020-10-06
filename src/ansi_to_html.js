@@ -104,12 +104,29 @@ function generateOutput(stack, token, data, options) {
     } else if (token === 'display') {
         result = handleDisplay(stack, data, options);
     } else if (token === 'xterm256') {
-        result = pushForegroundColor(stack, options.colors[data]);
+        result = handleXterm256(stack, data, options);
     } else if (token === 'rgb') {
         result = handleRgb(stack, data);
     }
 
     return result;
+}
+
+/**
+ * @param {Array} stack
+ * @param {string} data
+ * @param {object} options
+ * @returns {*}
+ */
+function handleXterm256(stack, data, options) {
+    data = data.substring(2).slice(0, -1);
+    const operation = +data.substr(0,2);
+    const color = +data.substr(5);
+    if (operation === 38) {
+        return pushForegroundColor(stack, options.colors[color]);
+    } else {
+        return pushBackgroundColor(stack, options.colors[color]);
+    }
 }
 
 /**
@@ -323,8 +340,8 @@ function tokenize(text, options, callback) {
         return '';
     }
 
-    function removeXterm256(m, g1) {
-        callback('xterm256', g1);
+    function removeXterm256(m) {
+        callback('xterm256', m);
         return '';
     }
 
@@ -379,7 +396,7 @@ function tokenize(text, options, callback) {
         pattern: /^\x1b\[[34]8;2;\d+;\d+;\d+m/,
         sub: rgb
     }, {
-        pattern: /^\x1b\[38;5;(\d+)m/,
+        pattern: /^\x1b\[[34]8;5;\d+m/,
         sub: removeXterm256
     }, {
         pattern: /^\n/,
