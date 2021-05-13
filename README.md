@@ -1,6 +1,5 @@
 ## Ansi to Html
-
-[![](https://travis-ci.org/rburns/ansi-to-html.svg?branch=master)](https://travis-ci.org/rburns/ansi-to-html/branches)
+[![rburns](https://circleci.com/gh/rburns/ansi-to-html.svg?style=svg)](https://circleci.com/gh/rburns/ansi-to-html)
 [![](https://img.shields.io/npm/v/ansi-to-html.svg)](https://www.npmjs.com/package/ansi-to-html)
 ![](https://img.shields.io/npm/dm/ansi-to-html.svg)
 
@@ -100,8 +99,8 @@ npm run lint
 npm run build
 ```
 
-- Builds the `/src` files by running `babel`. 
-- Saves the built files in `/lib` output directory. 
+- Builds the `/src` files by running `babel`.
+- Saves the built files in `/lib` output directory.
 - Recommended to run `babel` in Watch mode - will re-build the project each time the files are changed.
 ```bash
 npm run build:watch
