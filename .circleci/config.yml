@@ -1,29 +1,40 @@
 version: 2.1
+
 orbs:
   node: circleci/node@4.1
+
 jobs:
-  build-and-test:
+  build-and-test-15:
     docker:
-      - image: cimg/node:15.1
+      - image: cimg/node:15
     steps:
       - checkout
       - node/install-packages
       - run:
-          name: Run tests on node 15
+          name: build and test
           command: npm run lint && npm run build && npm test
+  build-and-test-15:
+    docker:
+      - image: cimg/node:14
+    steps:
+      - checkout
+      - node/install-packages
       - run:
-          name: Run tests on node 14
-          command: |
-            source /opt/circleci/.nvm/nvm.sh
-            nvm use 14
-            npm run lint && npm run build && npm test
+          name: build and test
+          command: npm run lint && npm run build && npm test
+  build-and-test-15:
+    docker:
+      - image: cimg/node:12
+    steps:
+      - checkout
+      - node/install-packages
       - run:
-          name: Run tests on node 12
-          command: |
-            source /opt/circleci/.nvm/nvm.sh
-            nvm use 12
-            npm run lint && npm run build && npm test
+          name: build and test
+          command: npm run lint && npm run build && npm test
+
 workflows:
-  sample:
+  test:
     jobs:
-      - build-and-test
+      - build-and-test-15
+      - build-and-test-14
+      - build-and-test-12
