@@ -4,9 +4,9 @@ orbs:
   node: circleci/node@4.1
 
 jobs:
-  build-and-test-15:
+  build-and-test-16:
     docker:
-      - image: cimg/node:15
+      - image: cimg/node:16.1
     steps:
       - checkout
       - node/install-packages
@@ -15,7 +15,7 @@ jobs:
           command: npm run lint && npm run build && npm test
   build-and-test-15:
     docker:
-      - image: cimg/node:14
+      - image: cimg/node:15.14
     steps:
       - checkout
       - node/install-packages
@@ -24,7 +24,16 @@ jobs:
           command: npm run lint && npm run build && npm test
   build-and-test-15:
     docker:
-      - image: cimg/node:12
+      - image: cimg/node:14.17
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          name: build and test
+          command: npm run lint && npm run build && npm test
+  build-and-test-15:
+    docker:
+      - image: cimg/node:12.22
     steps:
       - checkout
       - node/install-packages
@@ -35,6 +44,7 @@ jobs:
 workflows:
   test:
     jobs:
+      - build-and-test-16
       - build-and-test-15
       - build-and-test-14
       - build-and-test-12
