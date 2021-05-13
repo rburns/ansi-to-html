@@ -19,8 +19,9 @@ jobs:
             npm run lint && npm run build && npm test
       - run:
           name: Run tests on node 12
+          command: |
             source /opt/circleci/.nvm/nvm.sh
-            nvm use 14
+            nvm use 12
             npm run lint && npm run build && npm test
 workflows:
   sample:
