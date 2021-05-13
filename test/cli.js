@@ -85,7 +85,7 @@ describe('cli', function () {
     });
 
     it('prints version', async function () {
-        const result = '0.6.14\n';
+        const result = '0.6.15\n';
         let stdout = await runCLI('node lib/cli --version');
         expect(stdout).to.equal(result);
         stdout = await runCLI('node lib/cli -v');
