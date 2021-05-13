@@ -13,10 +13,15 @@ jobs:
           command: npm run lint && npm run build && npm test
       - run:
           name: Run tests on node 14
-          command: nvm use 14; npm run lint && npm run build && npm test
+          command: |
+            source /opt/circleci/.nvm/nvm.sh
+            nvm use 14
+            npm run lint && npm run build && npm test
       - run:
           name: Run tests on node 12
-          command: nvm use 12; npm run lint && npm run build && npm test
+            source /opt/circleci/.nvm/nvm.sh
+            nvm use 14
+            npm run lint && npm run build && npm test
 workflows:
   sample:
     jobs:
