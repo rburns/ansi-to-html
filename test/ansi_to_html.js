@@ -154,9 +154,16 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
-        it('renders xterm 256 sequences', function (done) {
+        it('renders xterm foreground 256 sequences', function (done) {
             const text = '\x1b[38;5;196mhello';
             const result = '<span style="color:#ff0000">hello</span>';
+
+            return test(text, result, done);
+        });
+
+        it('renders xterm background 256 sequences', function (done) {
+            const text = '\x1b[48;5;196mhello';
+            const result = '<span style="background-color:#ff0000">hello</span>';
 
             return test(text, result, done);
         });
