@@ -103,8 +103,10 @@ function generateOutput(stack, token, data, options) {
         result = pushText(data, options);
     } else if (token === 'display') {
         result = handleDisplay(stack, data, options);
-    } else if (token === 'xterm256') {
+    } else if (token === 'xterm256Foreground') {
         result = pushForegroundColor(stack, options.colors[data]);
+    } else if (token === 'xterm256Background') {
+        result = pushBackgroundColor(stack, options.colors[data]);
     } else if (token === 'rgb') {
         result = handleRgb(stack, data);
     }
@@ -119,10 +121,10 @@ function generateOutput(stack, token, data, options) {
  */
 function handleRgb(stack, data) {
     data = data.substring(2).slice(0, -1);
-    const operation = +data.substr(0,2);
+    const operation = +data.substr(0, 2);
 
     const color = data.substring(5).split(';');
-    const rgb = color.map(function(value) {
+    const rgb = color.map(function (value) {
         return ('0' + Number(value).toString(16)).substr(-2);
     }).join('');
 
@@ -280,7 +282,7 @@ function pushTag(stack, tag, style) {
  * @param {string} style
  * @returns {string}
  */
-function pushStyle (stack, style) {
+function pushStyle(stack, style) {
     return pushTag(stack, 'span', style);
 }
 
@@ -323,8 +325,13 @@ function tokenize(text, options, callback) {
         return '';
     }
 
-    function removeXterm256(m, g1) {
-        callback('xterm256', g1);
+    function removeXterm256Foreground(m, g1) {
+        callback('xterm256Foreground', g1);
+        return '';
+    }
+
+    function removeXterm256Background(m, g1) {
+        callback('xterm256Background', g1);
         return '';
     }
 
@@ -380,11 +387,14 @@ function tokenize(text, options, callback) {
         sub: rgb
     }, {
         pattern: /^\x1b\[38;5;(\d+)m/,
-        sub: removeXterm256
+        sub: removeXterm256Foreground
+    }, {
+        pattern: /^\x1b\[48;5;(\d+)m/,
+        sub: removeXterm256Background
     }, {
         pattern: /^\n/,
         sub: newline
-    },{
+    }, {
         pattern: /^\r+\n/,
         sub: newline
     }, {
@@ -486,7 +496,7 @@ class Filter {
      * @param {boolean=} options.stream Save style state across invocations of `toHtml()`.
      * @param {(string[] | {[code: number]: string})=} options.colors Can override specific colors or the entire ANSI palette.
      */
-    constructor (options) {
+    constructor(options) {
         options = options || {};
 
         if (options.colors) {
@@ -501,7 +511,7 @@ class Filter {
      * @param {string | string[]} input
      * @returns {string}
      */
-    toHtml (input) {
+    toHtml(input) {
         input = typeof input === 'string' ? [input] : input;
         const {stack, options} = this;
         const buf = [];
