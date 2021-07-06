@@ -321,6 +321,13 @@ describe('ansi to html', function () {
 
             return test(text, result, done);
         });
+
+        it('renders text following carriage return', function (done) {
+            const text = 'ANSI Hello\rWorld';
+            const result = 'ANSI HelloWorld';
+
+            return test(text, result, done);
+        });
     });
 
     describe('with escapeXML option enabled', function () {
