@@ -398,6 +398,9 @@ function tokenize(text, options, callback) {
         pattern: /^\r+\n/,
         sub: newline
     }, {
+        pattern: /^\r+/,
+        sub: remove
+    }, {
         pattern: /^\x1b\[((?:\d{1,3};?)+|)m/,
         sub: ansiMess
     }, {
