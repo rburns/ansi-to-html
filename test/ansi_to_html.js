@@ -322,9 +322,9 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
-        it('renders text following carriage return', function (done) {
+        it('renders text following carriage return (CR, mac style line break)', function (done) {
             const text = 'ANSI Hello\rWorld';
-            const result = 'ANSI HelloWorld';
+            const result = 'ANSI Hello\rWorld';
 
             return test(text, result, done);
         });
@@ -363,6 +363,20 @@ describe('ansi to html', function () {
 
         it('renders multiple line breaks', function (done) {
             const text = 'test\n\ntest\n';
+            const result = 'test<br/><br/>test<br/>';
+
+            return test(text, result, done, {newline: true});
+        });
+
+        it('renders mac styled line breaks (CR)', function (done) {
+            const text = 'test\rtest\r';
+            const result = 'test<br/>test<br/>';
+
+            return test(text, result, done, {newline: true});
+        });
+
+        it('renders multiple mac styled line breaks (CR)', function (done) {
+            const text = 'test\r\rtest\r';
             const result = 'test<br/><br/>test<br/>';
 
             return test(text, result, done, {newline: true});
