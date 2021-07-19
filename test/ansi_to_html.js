@@ -28,9 +28,30 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
-        it('returns plain text when given plain text with linefeed', function (done) {
+        it('returns plain text when given plain text with LF', function (done) {
             const text = 'test\ntest\n';
             const result = 'test\ntest\n';
+
+            return test(text, result, done);
+        });
+
+        it('returns plain text when given plain text with multiple LF', function (done) {
+            const text = 'test\n\n\ntest\n';
+            const result = 'test\n\n\ntest\n';
+
+            return test(text, result, done);
+        });
+
+        it('returns plain text when given plain text with CR', function (done) {
+            const text = 'testCRLF\rtest';
+            const result = 'testCRLF\rtest';
+
+            return test(text, result, done);
+        });
+
+        it('returns plain text when given plain text with multiple CR', function (done) {
+            const text = 'testCRLF\r\r\rtest';
+            const result = 'testCRLF\r\r\rtest';
 
             return test(text, result, done);
         });
@@ -42,9 +63,9 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
-        it('returns plain text when given plain text with multi CR', function (done) {
-            const text = 'testCRLF\r\r\r\ntest';
-            const result = 'testCRLF\r\r\r\ntest';
+        it('returns plain text when given plain text with multiple CR & LF', function (done) {
+            const text = 'testCRLF\r\n\r\ntest';
+            const result = 'testCRLF\r\n\r\ntest';
 
             return test(text, result, done);
         });
@@ -347,20 +368,6 @@ describe('ansi to html', function () {
             return test(text, result, done, {newline: true});
         });
 
-        it('renders windows styled line breaks (CR+LF)', function (done) {
-            const text = 'testCRLF\r\ntestLF';
-            const result = 'testCRLF<br/>testLF';
-
-            return test(text, result, done, {newline: true});
-        });
-
-        it('renders windows styled line breaks (multi CR+LF)', function (done) {
-            const text = 'testCRLF\r\r\r\ntestLF';
-            const result = 'testCRLF<br/>testLF';
-
-            return test(text, result, done, {newline: true});
-        });
-
         it('renders multiple line breaks', function (done) {
             const text = 'test\n\ntest\n';
             const result = 'test<br/><br/>test<br/>';
@@ -381,6 +388,21 @@ describe('ansi to html', function () {
 
             return test(text, result, done, {newline: true});
         });
+
+        it('renders windows styled line breaks (CR+LF)', function (done) {
+            const text = 'testCRLF\r\ntestLF';
+            const result = 'testCRLF<br/>testLF';
+
+            return test(text, result, done, {newline: true});
+        });
+
+        it('renders windows styled line breaks (multi CR+LF)', function (done) {
+            const text = 'testCRLF\r\n\r\ntestLF';
+            const result = 'testCRLF<br/><br/>testLF';
+
+            return test(text, result, done, {newline: true});
+        });
+
     });
 
     describe('with stream option enabled', function () {
