@@ -56,7 +56,7 @@ describe('ansi to html', function () {
             return test(text, result, done);
         });
 
-        it('returns returns formatting and CR when given CR amidst color codes', function (done) {
+        it('returns formatting when given CR amidst color codes', function (done) {
             const text = '\x1b[47m \x1b[94mANSI \x1b[0m \x1b[39;49mHello  \r  \x1b[96mWorld\x1b[0m';
             const result = '<span style="background-color:#AAA"> <span style="color:#55F">ANSI </span></span> <span style="color:#FFF"><span style="background-color:#000">Hello  \r  <span style="color:#5FF">World</span></span></span>';
 
@@ -396,7 +396,7 @@ describe('ansi to html', function () {
             return test(text, result, done, {newline: true});
         });
 
-        it('returns returns formatting and CR when given CR amidst color codes', function (done) {
+        it('returns formatting when given CR amidst color codes', function (done) {
             const text = '\x1b[47m \x1b[94mANSI \x1b[0m \x1b[39;49mHello  \r  \x1b[96mWorld\x1b[0m';
             const result = '<span style="background-color:#AAA"> <span style="color:#55F">ANSI </span></span> <span style="color:#FFF"><span style="background-color:#000">Hello  <br/>  <span style="color:#5FF">World</span></span></span>';
 
