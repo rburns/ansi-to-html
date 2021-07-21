@@ -43,15 +43,22 @@ describe('ansi to html', function () {
         });
 
         it('returns plain text when given plain text with CR', function (done) {
-            const text = 'testCRLF\rtest';
-            const result = 'testCRLF\rtest';
+            const text = 'testCR\rtest';
+            const result = 'testCR\rtest';
 
             return test(text, result, done);
         });
 
         it('returns plain text when given plain text with multiple CR', function (done) {
-            const text = 'testCRLF\r\r\rtest';
-            const result = 'testCRLF\r\r\rtest';
+            const text = 'testCR\r\r\rtest';
+            const result = 'testCR\r\r\rtest';
+
+            return test(text, result, done);
+        });
+
+        it('returns returns formatting and CR when given CR amidst color codes', function (done) {
+            const text = '\x1b[47m \x1b[94mANSI \x1b[0m \x1b[39;49mHello  \r  \x1b[96mWorld\x1b[0m';
+            const result = '<span style="background-color:#AAA"> <span style="color:#55F">ANSI </span></span> <span style="color:#FFF"><span style="background-color:#000">Hello  \r  <span style="color:#5FF">World</span></span></span>';
 
             return test(text, result, done);
         });
@@ -385,6 +392,13 @@ describe('ansi to html', function () {
         it('renders multiple mac styled line breaks (CR)', function (done) {
             const text = 'test\r\rtest\r';
             const result = 'test<br/><br/>test<br/>';
+
+            return test(text, result, done, {newline: true});
+        });
+
+        it('returns returns formatting and CR when given CR amidst color codes', function (done) {
+            const text = '\x1b[47m \x1b[94mANSI \x1b[0m \x1b[39;49mHello  \r  \x1b[96mWorld\x1b[0m';
+            const result = '<span style="background-color:#AAA"> <span style="color:#55F">ANSI </span></span> <span style="color:#FFF"><span style="background-color:#000">Hello  <br/>  <span style="color:#5FF">World</span></span></span>';
 
             return test(text, result, done, {newline: true});
         });
