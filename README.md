@@ -22,8 +22,8 @@ npm install ansi-to-html
 ## Usage
 
 ```javascript
-var Convert = require('ansi-to-html');
-var convert = new Convert();
+const Convert = require('ansi-to-html');
+const convert = new Convert();
 
 console.log(convert.toHtml('\x1b[30mblack\x1b[37mwhite'));
 
@@ -59,6 +59,10 @@ Options can be be passed to the constructor to customize behaviour.
 **bg** `<CSS color values>`. The default background color used when reset color codes are encountered.
 
 **newline** `true` or `false`. Convert newline characters to `<br/>`.
+
+**space** `true` or `false` (default). Convert any two sequential spaces to ` &#xa0;` (a space followed by a non-breaking space). You will probably wish to use this with a fixed width font, e.g., `font-family: monospace;`.
+
+**tabs** `null` (default) or a number. Converts tabs to a given number of non-breaking spaces (`&#xa0;`).
 
 **escapeXML** `true` or `false`. Generate HTML/XML entities.
 
@@ -118,4 +122,3 @@ npm test
 ```bash
 npm run test:watch
 ```
-
