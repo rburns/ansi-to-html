@@ -36,6 +36,9 @@ jobs:
       - image: cimg/node:14.21.1
     steps:
       - checkout
+      - run:
+          name: clear cache
+          command: npm cache clear --force
       - node/install-packages
       - run:
           name: lint and test
