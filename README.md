@@ -93,25 +93,12 @@ npm install
 npm run lint
 ```
 
-#### Build
-
-```bash
-npm run build
-```
-
-- Builds the `/src` files by running `babel`.
-- Saves the built files in `/lib` output directory.
-- Recommended to run `babel` in Watch mode - will re-build the project each time the files are changed.
-```bash
-npm run build:watch
-```
-
 #### Test
 
 ```bash
 npm test
 ```
-- Note: Runs the tests against the built files (in the `/lib` directory).
+- Note: Runs the tests against the source files (in the `/lib` directory).
 - You also run the tests in watch mode (will rerun tests when files are changed).
 - Recommended to run the build in watch mode as well to re-build the project before the tests are run.
 
