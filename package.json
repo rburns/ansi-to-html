@@ -102,7 +102,7 @@
     "nyc": "^15.1.0"
   },
   "dependencies": {
-    "entities": "^2.2.0"
+    "entities": "^4.0.0"
   },
   "bin": {
     "ansi-to-html": "./bin/ansi-to-html"
