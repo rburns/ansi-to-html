@@ -38,7 +38,7 @@ jobs:
       - checkout
       - run:
           name: clear cache
-          command: npm cache clear --force
+          command: npm cache clean --force
       - node/install-packages
       - run:
           name: lint and test
