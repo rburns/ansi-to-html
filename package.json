@@ -7,8 +7,6 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "build": "babel src --source-maps --copy-files --out-dir lib",
-    "build:watch": "babel src --source-maps --out-dir lib --watch",
     "lint": "eslint .",
     "test": "nyc mocha --reporter tap",
     "test:watch": "mocha --reporter tap --watch ./test ./"
@@ -78,6 +76,10 @@
       "url": "https://github.com/lior-chervinsky"
     },
     {
+      "name": "limichange",
+      "url": "https://github.com/limichange"
+    },
+    {
       "name": "Maple Miao",
       "url": "https://github.com/mapleeit"
     },
@@ -92,9 +94,6 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.15.7",
-    "@babel/core": "^7.15.5",
-    "@babel/preset-env": "^7.15.6",
     "chai": "^4.3.0",
     "eslint": "^7.0.0",
     "mocha": "^9.0.0",
@@ -106,10 +105,5 @@
   },
   "bin": {
     "ansi-to-html": "./bin/ansi-to-html"
-  },
-  "babel": {
-    "presets": [
-      "@babel/env"
-    ]
   }
 }
