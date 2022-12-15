@@ -1,30 +1,30 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@4.1
+  node: circleci/node@5.0.3
 
 jobs:
+  lint-and-test-19:
+    docker:
+      - image: cimg/node:19.2.0
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          name: lint and test
+          command: npm run lint && npm test
+  lint-and-test-18:
+    docker:
+      - image: cimg/node:18.12.1
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          name: lint and test
+          command: npm run lint && npm test
   lint-and-test-16:
     docker:
-      - image: cimg/node:16.1
-    steps:
-      - checkout
-      - node/install-packages
-      - run:
-          name: lint and test
-          command: npm run lint && npm test
-  lint-and-test-15:
-    docker:
-      - image: cimg/node:15.14
-    steps:
-      - checkout
-      - node/install-packages
-      - run:
-          name: lint and test
-          command: npm run lint && npm test
-  lint-and-test-12:
-    docker:
-      - image: cimg/node:14.17
+      - image: cimg/node:16.18.1
     steps:
       - checkout
       - node/install-packages
@@ -33,7 +33,7 @@ jobs:
           command: npm run lint && npm test
   lint-and-test-14:
     docker:
-      - image: cimg/node:12.22
+      - image: cimg/node:14.21.1
     steps:
       - checkout
       - node/install-packages
@@ -44,7 +44,7 @@ jobs:
 workflows:
   test:
     jobs:
+      - lint-and-test-19
+      - lint-and-test-18
       - lint-and-test-16
-      - lint-and-test-15
       - lint-and-test-14
-      - lint-and-test-12
