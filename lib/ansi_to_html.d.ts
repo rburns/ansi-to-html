@@ -19,5 +19,6 @@ declare module 'ansi-to-html' {
     toHtml(data: string): string
   }
 
-  export = Convert
+  module.exports = Convert;
+  export default Convert;
 }
